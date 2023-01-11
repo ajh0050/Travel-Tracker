@@ -10,7 +10,11 @@ import returnDataPromises from './fetchData';
 let allTravelers
 let allTrips
 let allDestinations
-let currentTraveler
+let currentTraveler = {
+    id: 3,
+    name: "Sibby Dawidowitsch",
+    travelerType: "shopper"
+    }
 
 //functions here
 function fetchApiCalls() {
