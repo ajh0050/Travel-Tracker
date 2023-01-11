@@ -2,27 +2,34 @@
 import './css/styles.css';
 
 import './images/turing-logo.png'
+import returnDataPromises from './fetchData';
 
 // query selectors go here
 
 // global variables used for data model here
-let travelersRepo 
+let allTravelers
+let allTrips
+let allDestinations
 let currentTraveler
 
 //functions here
-function apiCalls () {
-    getApiData()
-    loadHandler()
-}
+function fetchApiCalls() {
+    returnDataPromises().then((data) => {
+        allTravelers = data[0].travelers
+        allTrips = data[1].trips
+        allDestinations = data[2].destinations
 
-function getApiData() {
-    let getAllTravelers = fetch('http://localhost:3001/api/v1/travelers	')
-}
+        loadHandler()
+    }
+    )
 
+}
 
 function loadHandler() {
-    console.log("this loaded")
+    console.log("alltravelers", allTravelers)
+    console.log("allTrips", allTrips)
+    console.log("all destinations", allDestinations)
 }
 
 //event listeners here
-window.addEventListener("load", apiCalls())
+window.addEventListener("load", fetchApiCalls())
