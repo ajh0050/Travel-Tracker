@@ -1,6 +1,6 @@
 // import live here
 import './css/styles.css';
-
+import Trip from './Trip'
 import './images/turing-logo.png'
 import returnDataPromises from './fetchData';
 
@@ -20,8 +20,8 @@ let currentTraveler = {
 function fetchApiCalls() {
     returnDataPromises().then((data) => {
         allTravelers = data[0].travelers
-        allTrips = data[1].trips
         allDestinations = data[2].destinations
+        allTrips = data[1].trips.map((item) => new Trip(item, allDestinations))
 
         loadHandler()
     }

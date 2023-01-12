@@ -1,6 +1,7 @@
 import { expect } from 'chai';
 import Traveler from '../src/Traveler';
-import { tripsData } from './testData';
+import { tripsData,destinationsData } from './testData';
+import Trip from '../src/Trip';
 
 describe('Traveler class', function () {
   let traveler
@@ -11,8 +12,8 @@ describe('Traveler class', function () {
       name: "Sibby Dawidowitsch",
       travelerType: "shopper"
     }
-
-    traveler = new Traveler(currentTraveler, tripsData)
+    let instantiateTrips = tripsData.map((item) => new Trip (item, destinationsData))
+    traveler = new Traveler(currentTraveler, instantiateTrips)
   });
 
   it("Should be a function", () => {
@@ -23,48 +24,9 @@ describe('Traveler class', function () {
     expect(traveler).to.be.an.instanceOf(Traveler);
   });
 
-  it("Should be a function", () => {
-    expect(traveler.trips).to.deep.equal([
-      {
-        id: 3,
-        userID: 3,
-        destinationID: 22,
-        travelers: 4,
-        date: "2022/05/22",
-        duration: 17,
-        status: "approved",
-        suggestedActivities: []
-      },
-      {
-        id: 41,
-        userID: 3,
-        destinationID: 25,
-        travelers: 3,
-        date: "2020/08/30",
-        duration: 11,
-        status: "approved",
-        suggestedActivities: []
-      },
-      {
-        id: 50,
-        userID: 3,
-        destinationID: 16,
-        travelers: 5,
-        date: "2020/07/02",
-        duration: 17,
-        status: "approved",
-        suggestedActivities: []
-      },
-      {
-        id: 65,
-        userID: 3,
-        destinationID: 35,
-        travelers: 4,
-        date: "2020/03/21",
-        duration: 18,
-        status: "approved",
-        suggestedActivities: []
-      }]);
+  it("Should provide a way to access all of the trips that a traveler has ever taken", () => {
+    let firstItem = new Trip (tripsData[0], destinationsData)
+    expect(traveler.trips[0]).to.deep.equal(firstItem);
   });
 
 });

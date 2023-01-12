@@ -12,9 +12,6 @@ class Traveler {
         return filteredTrips
     }
 
-    getAmountSpentInLastyear() {
-
-    }
 }
 
 export default Traveler; 
