@@ -1,6 +1,7 @@
 // import live here
 import './css/styles.css';
 import Trip from './Trip'
+import Traveler from './Traveler'
 import './images/turing-logo.png'
 import returnDataPromises from './fetchData';
 
@@ -33,6 +34,14 @@ function loadHandler() {
     console.log("alltravelers", allTravelers)
     console.log("allTrips", allTrips)
     console.log("all destinations", allDestinations)
+    currentTraveler = new Traveler(allTravelers[2], allTrips)
+
+    let todaysDate  = new Date("01/15/2021")
+    console.log("currentTraveler", currentTraveler)
+    console.log("pastTrips", currentTraveler.getPastTrips(todaysDate))
+    console.log("future trips", currentTraveler.getFutureTrips(todaysDate))
+    console.log("total cost", currentTraveler.getTotalAmountSpentThisYear(2020))
+
 }
 
 //event listeners here

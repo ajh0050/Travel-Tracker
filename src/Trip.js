@@ -15,6 +15,8 @@ class Trip {
         this.estimatedFlightCostPerPerson = this.destination.estimatedFlightCostPerPerson
         this.destinationImage = this.destination.image 
         this.destinationImageAltText = this.destination.alt 
+        this.costPerPerson = this.getCostPerPerson()
+        this.totalTripCost = this.getTotalTripCost()
     }
 
     matchDestination() {
@@ -22,6 +24,19 @@ class Trip {
         return matchedDestination
     }
 
+    approveTrip() {
+        this.status = "approved"
+        return "This trip has been approved"
+    }
+
+    getCostPerPerson() {
+        let costPerPerson = (this.estimatedLodgingCostPerDay * this.numberOfDays) + this.estimatedFlightCostPerPerson
+        return costPerPerson
+    }
+
+    getTotalTripCost() {
+        return this.costPerPerson * this.numberOfTravelers
+    }
 
 }
 

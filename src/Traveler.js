@@ -12,6 +12,38 @@ class Traveler {
         return filteredTrips
     }
 
+    getPastTrips(currentDate) {
+        let pastTrips = this.trips.filter((trip) => currentDate>trip.date)
+        return pastTrips
+    }
+
+    getFutureTrips(currentDate) {
+        let futureTrips = this.trips.filter((trip) => currentDate<trip.date)
+        return futureTrips   
+    }
+
+    getPendingTrips() {
+        let pendingTrips = this.trips.filter((trip) => trip.status === "pending")
+        return pendingTrips
+    }
+
+    getTotalAmountSpentThisYear(year) {
+       let beginningYearDate = new Date (`01/01/${year}`)
+       let endingYearDate = new Date (`12/31/${year}`)
+       
+       let tripsFromThisYear = this.trips.filter((trip) => {
+        if (trip.date > beginningYearDate && trip.date<endingYearDate ) {
+            return true
+        }
+       })
+
+       let sumOfTripCostsFromThisYear = tripsFromThisYear.reduce((acc,trip) => {
+            acc += trip.getTotalTripCost()
+            return acc
+       },0)
+       return sumOfTripCostsFromThisYear
+    }
+
 }
 
 export default Traveler; 
