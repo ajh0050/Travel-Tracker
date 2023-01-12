@@ -31,7 +31,7 @@ class Trip {
 
     getCostPerPerson() {
         let costPerPerson = (this.estimatedLodgingCostPerDay * this.numberOfDays) + this.estimatedFlightCostPerPerson
-        return costPerPerson
+        return Math.round(costPerPerson * 1.1)
     }
 
     getTotalTripCost() {

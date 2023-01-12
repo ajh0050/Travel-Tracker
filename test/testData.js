@@ -47,7 +47,7 @@ let tripsData = [
         travelers: 4,
         date: "2020/03/21",
         duration: 18,
-        status: "approved",
+        status: "pending",
         suggestedActivities: []
     }]
 

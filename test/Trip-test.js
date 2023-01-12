@@ -83,4 +83,12 @@ describe('Traveler class', function () {
   it("Should be a property to store alt text for destination image", () => {
     expect(trip.destinationImageAltText).to.equal("people standing inside a colosseum during the day");
   });
+
+  it("Should have a property to tell you cost per person", () => {
+    expect(trip.costPerPerson).to.equal(2398);
+  });
+
+  it("Should have a property to tell you total trip cost", () => {
+    expect(trip.totalTripCost).to.equal(9592);
+  });
 });
