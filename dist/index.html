@@ -38,13 +38,15 @@
           <label for="newTripDate">What date will the trip begin?</label>
           <input type="date" id="newTripDate" name="tripDate" required>
           <label for="newTripDuration">How many days will this trip last?</label>
-          <input type="number" id="newTripDuration" name="tripDuration">
+          <input type="number" id="newTripDuration" name="tripDuration" required>
+          <label for="newTripNumberOfTravelers">How many days will this trip last?</label>
+          <input type="number" id="newTripNumberOfTravelers" name="newTripNumberOfTravelers" required>
           <label for="newTripDestination">What is your destination?</label>
-          <select name="destinations" id="newTripDestination" size="6">
-
-          </select>
+          <select name="destinations" id="newTripDestination" size="6" required></select>
+          <input type="submit" value="Submit">
         </form>
-        <p class="estimated-new-trip-cost"></p>
+        <button class="view-estimated-trip-cost-button">Get estimated trip cost</button>
+        <p class="estimated-new-trip-cost-display">This trip has an estimated cost of :</p>
       </section>
     </section>
   </main>

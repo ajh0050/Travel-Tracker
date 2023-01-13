@@ -14,10 +14,17 @@ const totalSpentThisYearOnTrips = document.querySelector(".total-spent-this-year
 const pendingTripsOfCurrentTraveler = document.querySelector(".current-traveler-pending-trips")
 const upcomingTripsOfCurrentTraveler = document.querySelector(".current-traveler-upcoming-trips")
 const pastTripsOfCurrentTraveler = document.querySelector(".current-traveler-past-trips")
-const newTripFormDestinationsSelect = document.querySelector("#newTripDestination")
+const newTripEstimatedCostDisplay = document.querySelector(".estimated-new-trip-cost-display")
 
 const createNewTripViewButton = document.querySelector('.create-new-trip-view-button')
 const viewCurrentTravelerTripsDisplayButton = document.querySelector('.view-trips-display-button')
+const getNewTripEstimatedCostButton = document.querySelector('.view-estimated-trip-cost-button')
+
+const newTripFormDestinationsSelect = document.querySelector("#newTripDestination")
+const newTripDate = document.querySelector('#newTripDate')
+const newTripDuration = document.querySelector('#newTripDuration')
+const newTripDestination = document.querySelector('#newTripDestination')
+const newTripNumberOfTravelers = document.querySelector('#newTripNumberOfTravelers')
 
 const travelerDashboardView = document.querySelector('.traveler-dashboard-view')
 const travelerTripsDisplay = document.querySelector('.traveler-trips-display')
@@ -55,7 +62,6 @@ function hideElement (hideThis) {
 }
 
 function showElement (showThis) {
-    console.log(showThis)
     showThis.classList.remove("hidden")
 }
 
@@ -180,6 +186,30 @@ function displayNewTripFormView() {
     createDestinationOptionSleections()
 }
 
+function displayEstimatedCostForNewTrip(){
+    console.log("new trip date value",newTripDate.value)
+    console.log("new trip destination id value",newTripDestination.value)
+    if (newTripDate.value === ""|| newTripDuration.value ==="" || newTripDestination.value === "" || newTripNumberOfTravelers ==="") {
+        alert("Form must be completely filled")
+    } else {
+        let newDate = new Date(newTripDate.value)
+        let reformattedDated = `${newDate.getFullYear()}/${newDate.getMonth()}/${newDate.getDay()}`
+
+        let newTripData = {
+            id: (allTrips.length+1),
+            userID: currentTraveler.id,
+            destinationID: Number(newTripDestination.value),
+            travelers: newTripNumberOfTravelers.value,
+            date: reformattedDated,
+            duration: newTripDuration.value,
+            status: "pending",
+            suggestedActivities: [ ]
+            }
+        let newTrip = new Trip(newTripData,allDestinations)
+        newTripEstimatedCostDisplay.innerText = `This trip has an estimated cost of :$${newTrip.getTotalTripCost()}`
+    }
+}
+
 //event listeners here
 window.addEventListener("load", fetchApiCalls())
 
@@ -194,4 +224,9 @@ viewCurrentTravelerTripsDisplayButton.addEventListener('click', (e)=>{
     hideElement(newTripFormView)
     showElement(travelerTripsDisplay)
     showElement(createNewTripViewButton)
+})
+
+getNewTripEstimatedCostButton.addEventListener('click', (e)=> {
+    e.preventDefault()
+    displayEstimatedCostForNewTrip()
 })
