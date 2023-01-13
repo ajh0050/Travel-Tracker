@@ -1,3 +1,73 @@
-body {
-  background: radial-gradient(circle, rgba(63,94,251,1) 0%, rgba(252,70,107,1) 100%);
+*, html {
+  margin:0;
+  padding:0;  
+}
+
+.main-content{
+  display:flex;
+  flex-direction: column;
+}
+
+.traveler-dashboard-view {
+  display:flex;
+  flex-direction: column;
+  width: 100vw;
+  height: 100vh;
+}
+
+.traveler-header{
+  width: 100vw;
+  height: 10vh;
+  display: flex;
+  justify-content: space-between;
+}
+
+.traveler-main-display{
+  display: flex;
+  flex-direction: column;
+  width:100vw;
+  height: 80vh;
+}
+
+.current-traveler-pending-trips-container{
+  display:flex;
+  flex-direction: column;
+}
+
+.current-traveler-upcoming-trips-container{
+  display:flex;
+  flex-direction: column;
+}
+
+.current-traveler-past-trips-container{
+  display:flex;
+  flex-direction: column;
+}
+
+.current-traveler-past-trips{
+  display:flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+}
+
+.current-traveler-future-trips{
+  display:flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+}
+
+.current-traveler-pending-trips{
+  display:flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+}
+
+.trip-card {
+  display: flex;
+  flex-direction: column;
+  height: 35vh;
+  width: 15vw;
+  border: solid 1px;
+  margin: 10px;
+  border-radius: 5px;
 }
