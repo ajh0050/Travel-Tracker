@@ -8,10 +8,28 @@
 </head>
 <body>
   <!-- <img src="./images/turing-logo.png" alt="turing logo"> -->
-  <main>
-    <section class="traveler-view"> 
-      <aside class="traveler-sidebar"></aside>
-      <section class="traveler-main-display"></section>
+  <main class="main-content">
+    <section class="traveler-dashboard-view"> 
+      <header class="traveler-header">
+        <h2 class="welcome-text"></h2>
+        <p class="total-spent-this-year"></p>
+      </header>
+      <section class="traveler-main-display">
+        <section class="current-traveler-pending-trips-container">
+          <h3 class="current-traveler-pending-trips-title">Pending Trips</h3>
+          <section class="current-traveler-pending-trips"></section>
+        </section>
+        <hr>
+        <section class="current-traveler-upcoming-trips-container">
+          <h3 class="current-traveler-upcoming-trips-title">Upcoming Trips</h3>
+          <section class="current-traveler-upcoming-trips"></section>
+        </section>
+        <hr>
+        <section class="current-traveler-past-trips-container">
+          <h3 class="current-traveler-past-trips-title">Past Trips</h3>
+          <section class="current-traveler-past-trips"></section>
+        </section>
+      </section>
     </section>
   </main>
   <script src="bundle.js"></script>
