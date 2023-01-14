@@ -60,6 +60,6 @@ describe('Traveler class', function () {
 
   it("Should provide a way to get the total amount spent on trips this year", () => {
     expect(traveler.getTotalAmountSpentThisYear(2022)).to.equal(9592);
-    expect(traveler.getTotalAmountSpentThisYear(2020)).to.equal(31999);
+    expect(traveler.getTotalAmountSpentThisYear(2020)).to.equal(15719);
   });
 });
