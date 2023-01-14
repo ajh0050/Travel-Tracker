@@ -95,7 +95,7 @@ function displayCurrentTravelerPendingTrips() {
                   <div class="card-footer-container">
                     <h4 class="trip-card-label">${trip.destinationName}</h4>
                     <p class="trip-card-info">
-                    Date of Trip: ${trip.date.getDay()}/${trip.date.getMonth()}/${trip.date.getFullYear()} <br>
+                    Date: ${trip.date.getDay()}/${trip.date.getMonth()}/${trip.date.getFullYear()} <br>
                     Duration: ${trip.numberOfDays} days <br>
                     Travelers: ${trip.numberOfTravelers} <br>
                     Total Trip Cost: $${trip.totalTripCost} <br>
@@ -108,7 +108,7 @@ function displayCurrentTravelerPendingTrips() {
     
     if(currentTraveler.getPendingTrips().length === 0){
         pendingTripsOfCurrentTraveler.innerHTML = `
-        <h5 class="empty-section-text">There are currently no pending trips </h5>
+        <p class="empty-section-text">There are currently no pending trips </p>
         `;
     }
    
@@ -124,7 +124,7 @@ function displayCurrentTravelerUpcomingTrips() {
                   <div class="card-footer-container">
                     <h4 class="trip-card-label">${trip.destinationName}</h4>
                     <p class="trip-card-info">
-                    Date of Trip: ${trip.date.getDay()}/${trip.date.getMonth()}/${trip.date.getFullYear()} <br>
+                    Date: ${trip.date.getDay()}/${trip.date.getMonth()}/${trip.date.getFullYear()} <br>
                     Duration: ${trip.numberOfDays} days <br>
                     Travelers: ${trip.numberOfTravelers} <br>
                     Total Trip Cost: $${trip.totalTripCost} <br>
@@ -137,7 +137,7 @@ function displayCurrentTravelerUpcomingTrips() {
     
     if(currentTraveler.getFutureTrips(todaysDate).length === 0){
         upcomingTripsOfCurrentTraveler.innerHTML = `
-        <h5 class="empty-section-text">There are currently no upcoming trips </h5>
+        <p class="empty-section-text">There are currently no upcoming trips </p>
         `;
     }
 }
@@ -152,7 +152,7 @@ function displayCurrentTravelerPastTrips() {
                   <div class="card-footer-container">
                     <h4 class="trip-card-label">${trip.destinationName}</h4>
                     <p class="trip-card-info">
-                    Date of Trip: ${trip.date.getDay()}/${trip.date.getMonth()}/${trip.date.getFullYear()} <br>
+                    Date: ${trip.date.getDay()}/${trip.date.getMonth()}/${trip.date.getFullYear()} <br>
                     Duration: ${trip.numberOfDays} days <br>
                     Travelers: ${trip.numberOfTravelers} <br>
                     Total Trip Cost: $${trip.totalTripCost} <br>
@@ -165,7 +165,7 @@ function displayCurrentTravelerPastTrips() {
     
     if(currentTraveler.getPastTrips(todaysDate).length === 0){
         pastTripsOfCurrentTraveler.innerHTML = `
-        <h5 class="empty-section-text">There are currently no past trips </h5>
+        <p class="empty-section-text">There are currently no past trips </p>
         `;
     }
 }
@@ -232,7 +232,10 @@ function postNewTrip(){
       throw new Error('Something went wrong with the server!!!!!')
     }
   })
-  .then(fetchApiCalls())
+  .then(()=>{
+    fetchApiCalls()
+    displayCurrentTravelerTripsView()
+})
   .catch(error => {
     console.error(error.message)
   })
@@ -265,5 +268,4 @@ getNewTripEstimatedCostButton.addEventListener('click', (e)=> {
 newTripForm.addEventListener('submit', (e)=> {
     e.preventDefault()
     postNewTrip()
-    displayCurrentTravelerTripsView()
 })

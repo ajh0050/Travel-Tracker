@@ -66,8 +66,8 @@
 .trip-card {
   display: flex;
   flex-direction: column;
-  height: 35vh;
-  width: 15vw;
+  height: 300px;
+  width: 150px;
   border: solid 1px;
   margin: 10px;
   border-radius: 5px;

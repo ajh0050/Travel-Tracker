@@ -18,7 +18,7 @@ class Traveler {
     }
 
     getFutureTrips(currentDate) {
-        let futureTrips = this.trips.filter((trip) => currentDate<trip.date)
+        let futureTrips = this.trips.filter((trip) => currentDate<trip.date && trip.status ==="approved")
         return futureTrips   
     }
 
@@ -32,7 +32,7 @@ class Traveler {
        let endingYearDate = new Date (`12/31/${year}`)
        
        let tripsFromThisYear = this.trips.filter((trip) => {
-        if (trip.date > beginningYearDate && trip.date<endingYearDate ) {
+        if (trip.date > beginningYearDate && trip.date<endingYearDate && trip.status ==="approved") {
             return true
         }
        })
