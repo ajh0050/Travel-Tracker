@@ -20,6 +20,7 @@ const createNewTripViewButton = document.querySelector('.create-new-trip-view-bu
 const viewCurrentTravelerTripsDisplayButton = document.querySelector('.view-trips-display-button')
 const getNewTripEstimatedCostButton = document.querySelector('.view-estimated-trip-cost-button')
 
+const newTripForm = document.querySelector('.new-trip-form')
 const newTripFormDestinationsSelect = document.querySelector("#newTripDestination")
 const newTripDate = document.querySelector('#newTripDate')
 const newTripDuration = document.querySelector('#newTripDuration')
@@ -66,11 +67,10 @@ function showElement (showThis) {
 }
 
 function loadHandler() {
-    currentTraveler = new Traveler(allTravelers[generateRandomIndex()], allTrips)
+    currentTraveler = new Traveler(allTravelers[2], allTrips)
     displayCurrentTravelerTrips()
     console.log(currentTraveler)
 }
-
 
 function displayCurrentTravelerTrips() {
     displayCurrentTravelerPendingTrips()
@@ -170,7 +170,7 @@ function displayCurrentTravelerPastTrips() {
     }
 }
 
-function createDestinationOptionSleections() {
+function createDestinationOptionSelections() {
     newTripFormDestinationsSelect.innerHTML = ``;
     allDestinations.forEach((destination)=>{
         let newOption = new Option(destination.destination, destination.id)
@@ -183,33 +183,67 @@ function displayNewTripFormView() {
     hideElement(travelerTripsDisplay)
     showElement(newTripFormView)
     showElement(viewCurrentTravelerTripsDisplayButton)
-    createDestinationOptionSleections()
+    createDestinationOptionSelections()
 }
 
 function displayEstimatedCostForNewTrip(){
-    console.log("new trip date value",newTripDate.value)
-    console.log("new trip destination id value",newTripDestination.value)
     if (newTripDate.value === ""|| newTripDuration.value ==="" || newTripDestination.value === "" || newTripNumberOfTravelers ==="") {
         alert("Form must be completely filled")
     } else {
-        let newDate = new Date(newTripDate.value)
-        let reformattedDated = `${newDate.getFullYear()}/${newDate.getMonth()}/${newDate.getDay()}`
-
-        let newTripData = {
-            id: (allTrips.length+1),
-            userID: currentTraveler.id,
-            destinationID: Number(newTripDestination.value),
-            travelers: newTripNumberOfTravelers.value,
-            date: reformattedDated,
-            duration: newTripDuration.value,
-            status: "pending",
-            suggestedActivities: [ ]
-            }
-        let newTrip = new Trip(newTripData,allDestinations)
+        let newTrip = new Trip(formatNewTripFormPostData(),allDestinations)
         newTripEstimatedCostDisplay.innerText = `This trip has an estimated cost of :$${newTrip.getTotalTripCost()}`
     }
 }
 
+function formatNewTripFormPostData() {
+    let newDate = new Date(newTripDate.value)
+    let dd = String(newDate.getDate()).padStart(2, '0');
+    let mm = String(newDate.getMonth() + 1).padStart(2, '0'); 
+    let reformattedDate = `${newDate.getFullYear()}/${mm}/${dd}`
+    console.log("reformatted date",reformattedDate)
+    let newTripPostData = {
+        id: Number(allTrips.length+1),
+        userID: Number(currentTraveler.userID),
+        destinationID: Number(newTripDestination.value),
+        travelers: Number(newTripNumberOfTravelers.value),
+        date: reformattedDate,
+        duration: Number(newTripDuration.value),
+        status: "pending",
+        suggestedActivities: []
+        }
+
+    return newTripPostData
+}
+
+function postNewTrip(){
+    const postData = formatNewTripFormPostData()
+
+    fetch("http://localhost:3001/api/v1/trips", {
+    method: "POST",
+    body: JSON.stringify(postData),
+    headers: {
+      "Content-Type": "application/json"
+    }
+  })
+  .then(response => {
+    if(response.ok){
+      return response.json()
+    } else {
+      throw new Error('Something went wrong with the server!!!!!')
+    }
+  })
+  .then(fetchApiCalls())
+  .catch(error => {
+    console.error(error.message)
+  })
+}
+
+function displayCurrentTravelerTripsView() {
+    hideElement(viewCurrentTravelerTripsDisplayButton)
+    hideElement(newTripFormView)
+    showElement(travelerTripsDisplay)
+    showElement(createNewTripViewButton)
+}
 //event listeners here
 window.addEventListener("load", fetchApiCalls())
 
@@ -220,13 +254,16 @@ createNewTripViewButton.addEventListener('click', (e) => {
 
 viewCurrentTravelerTripsDisplayButton.addEventListener('click', (e)=>{
     e.preventDefault()
-    hideElement(viewCurrentTravelerTripsDisplayButton)
-    hideElement(newTripFormView)
-    showElement(travelerTripsDisplay)
-    showElement(createNewTripViewButton)
+    displayCurrentTravelerTripsView()
 })
 
 getNewTripEstimatedCostButton.addEventListener('click', (e)=> {
     e.preventDefault()
     displayEstimatedCostForNewTrip()
+})
+
+newTripForm.addEventListener('submit', (e)=> {
+    e.preventDefault()
+    postNewTrip()
+    displayCurrentTravelerTripsView()
 })
