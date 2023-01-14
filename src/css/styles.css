@@ -29,11 +29,14 @@
   height:20vh;
 }
 
-.traveler-main-display{
+
+.traveler-trips-display{
   display: flex;
   flex-direction: column;
   width:100vw;
   /* height: 80vh; */
+  background: rgb(108,155,186);
+  background: linear-gradient(360deg, rgba(108,155,186,1) 0%, rgba(169,198,217,1) 39%, rgba(247,228,191,1) 100%);
 }
 
 .current-traveler-pending-trips-container{
@@ -77,6 +80,8 @@
   border: solid 1px;
   margin: 10px;
   border-radius: 5px;
+  box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
+
 }
 
 .hidden {
