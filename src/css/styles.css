@@ -25,10 +25,25 @@
 
 }
 
-.welcome-text {
+.welcome-text-container{
   height:20vh;
 }
 
+.welcome-text {
+  font-size: 1.5rem;
+  margin: 10px;
+}
+
+.create-new-trip-view-button {
+  margin-top: 30px;
+  height: 35px;
+  width: 160px;
+  font-weight: bold;
+}
+
+.total-spent-this-year{
+  margin: 20px;
+}
 
 .traveler-trips-display{
   display: flex;
@@ -76,7 +91,7 @@
   display: flex;
   flex-direction: column;
   height: 300px;
-  width: 150px;
+  width: 200px;
   border: solid 1px;
   margin: 10px;
   border-radius: 20px;
