@@ -13,8 +13,10 @@
       <header class="traveler-header">
         <h2 class="welcome-text"></h2>
         <p class="total-spent-this-year"></p>
+        <button class="create-new-trip-view-button">Request A New Trip</button>
+        <button class="view-trips-display-button hidden">View Your Trips</button>
       </header>
-      <section class="traveler-main-display">
+      <section class="traveler-trips-display">
         <section class="current-traveler-pending-trips-container">
           <h3 class="current-traveler-pending-trips-title">Pending Trips</h3>
           <section class="current-traveler-pending-trips"></section>
@@ -29,6 +31,22 @@
           <h3 class="current-traveler-past-trips-title">Past Trips</h3>
           <section class="current-traveler-past-trips"></section>
         </section>
+      </section>
+      <section class="new-trip-form-view hidden">
+        <h3 class="new-trip-form-title">What are the details of your trip?</h3>
+        <form class="new-trip-form">
+          <label for="newTripDate">What date will the trip begin?</label>
+          <input type="date" id="newTripDate" name="tripDate" required>
+          <label for="newTripDuration">How many days will this trip last?</label>
+          <input type="number" id="newTripDuration" name="tripDuration" required>
+          <label for="newTripNumberOfTravelers">How many days will this trip last?</label>
+          <input type="number" id="newTripNumberOfTravelers" name="newTripNumberOfTravelers" required>
+          <label for="newTripDestination">What is your destination?</label>
+          <select name="destinations" id="newTripDestination" size="6" required></select>
+          <input type="submit" value="Submit">
+        </form>
+        <button class="view-estimated-trip-cost-button">Get estimated trip cost</button>
+        <p class="estimated-new-trip-cost-display">This trip has an estimated cost of :</p>
       </section>
     </section>
   </main>

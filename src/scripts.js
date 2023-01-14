@@ -1,3 +1,5 @@
+"use strict";
+
 // import live here
 import './css/styles.css';
 import Trip from './Trip'
@@ -5,13 +7,29 @@ import Traveler from './Traveler'
 import './images/turing-logo.png'
 import returnDataPromises from './fetchData';
 
+
 // query selectors go here
 const welcomeText = document.querySelector(".welcome-text")
 const totalSpentThisYearOnTrips = document.querySelector(".total-spent-this-year")
 const pendingTripsOfCurrentTraveler = document.querySelector(".current-traveler-pending-trips")
 const upcomingTripsOfCurrentTraveler = document.querySelector(".current-traveler-upcoming-trips")
 const pastTripsOfCurrentTraveler = document.querySelector(".current-traveler-past-trips")
+const newTripEstimatedCostDisplay = document.querySelector(".estimated-new-trip-cost-display")
 
+const createNewTripViewButton = document.querySelector('.create-new-trip-view-button')
+const viewCurrentTravelerTripsDisplayButton = document.querySelector('.view-trips-display-button')
+const getNewTripEstimatedCostButton = document.querySelector('.view-estimated-trip-cost-button')
+
+const newTripForm = document.querySelector('.new-trip-form')
+const newTripFormDestinationsSelect = document.querySelector("#newTripDestination")
+const newTripDate = document.querySelector('#newTripDate')
+const newTripDuration = document.querySelector('#newTripDuration')
+const newTripDestination = document.querySelector('#newTripDestination')
+const newTripNumberOfTravelers = document.querySelector('#newTripNumberOfTravelers')
+
+const travelerDashboardView = document.querySelector('.traveler-dashboard-view')
+const travelerTripsDisplay = document.querySelector('.traveler-trips-display')
+const newTripFormView = document.querySelector('.new-trip-form-view')
 
 // global variables used for data model here
 let allTravelers
@@ -38,25 +56,21 @@ function fetchApiCalls() {
 }
 function generateRandomIndex() {
     return Math.floor(Math.random() * allTravelers.length);
-  }
+}
+
+function hideElement (hideThis) {
+    hideThis.classList.add("hidden")
+}
+
+function showElement (showThis) {
+    showThis.classList.remove("hidden")
+}
 
 function loadHandler() {
-    // console.log("alltravelers", allTravelers)
-    // console.log("allTrips", allTrips)
-    // console.log("all destinations", allDestinations)
-    // currentTraveler = new Traveler(allTravelers[2], allTrips)
-
-    // let todaysDate  = new Date("01/15/2021")
-    // console.log("currentTraveler", currentTraveler)
-    // console.log("pastTrips", currentTraveler.getPastTrips(todaysDate))
-    // console.log("future trips", currentTraveler.getFutureTrips(todaysDate))
-    // console.log("total cost", currentTraveler.getTotalAmountSpentThisYear(2020))
-    
-    currentTraveler = new Traveler(allTravelers[generateRandomIndex()], allTrips)
+    currentTraveler = new Traveler(allTravelers[2], allTrips)
     displayCurrentTravelerTrips()
     console.log(currentTraveler)
 }
-
 
 function displayCurrentTravelerTrips() {
     displayCurrentTravelerPendingTrips()
@@ -81,10 +95,10 @@ function displayCurrentTravelerPendingTrips() {
                   <div class="card-footer-container">
                     <h4 class="trip-card-label">${trip.destinationName}</h4>
                     <p class="trip-card-info">
-                    Date of Trip: ${trip.date.getDay()}/${trip.date.getMonth()}/${trip.date.getFullYear()}
-                    Duration: ${trip.numberOfDays} days
-                    Travelers: ${trip.numberOfTravelers}
-                    Total Trip Cost: $${trip.totalTripCost}
+                    Date of Trip: ${trip.date.getDay()}/${trip.date.getMonth()}/${trip.date.getFullYear()} <br>
+                    Duration: ${trip.numberOfDays} days <br>
+                    Travelers: ${trip.numberOfTravelers} <br>
+                    Total Trip Cost: $${trip.totalTripCost} <br>
                     </p> 
                   </div>
             </article>
@@ -110,10 +124,10 @@ function displayCurrentTravelerUpcomingTrips() {
                   <div class="card-footer-container">
                     <h4 class="trip-card-label">${trip.destinationName}</h4>
                     <p class="trip-card-info">
-                    Date of Trip: ${trip.date.getDay()}/${trip.date.getMonth()}/${trip.date.getFullYear()}
-                    Duration: ${trip.numberOfDays} days
-                    Travelers: ${trip.numberOfTravelers}
-                    Total Trip Cost: $${trip.totalTripCost}
+                    Date of Trip: ${trip.date.getDay()}/${trip.date.getMonth()}/${trip.date.getFullYear()} <br>
+                    Duration: ${trip.numberOfDays} days <br>
+                    Travelers: ${trip.numberOfTravelers} <br>
+                    Total Trip Cost: $${trip.totalTripCost} <br>
                     </p> 
                   </div>
             </article>
@@ -138,10 +152,10 @@ function displayCurrentTravelerPastTrips() {
                   <div class="card-footer-container">
                     <h4 class="trip-card-label">${trip.destinationName}</h4>
                     <p class="trip-card-info">
-                    Date of Trip: ${trip.date.getDay()}/${trip.date.getMonth()}/${trip.date.getFullYear()}
-                    Duration: ${trip.numberOfDays} days
-                    Travelers: ${trip.numberOfTravelers} 
-                    Total Trip Cost: $${trip.totalTripCost}
+                    Date of Trip: ${trip.date.getDay()}/${trip.date.getMonth()}/${trip.date.getFullYear()} <br>
+                    Duration: ${trip.numberOfDays} days <br>
+                    Travelers: ${trip.numberOfTravelers} <br>
+                    Total Trip Cost: $${trip.totalTripCost} <br>
                     </p> 
                   </div>
             </article>
@@ -156,5 +170,100 @@ function displayCurrentTravelerPastTrips() {
     }
 }
 
+function createDestinationOptionSelections() {
+    newTripFormDestinationsSelect.innerHTML = ``;
+    allDestinations.forEach((destination)=>{
+        let newOption = new Option(destination.destination, destination.id)
+        newTripFormDestinationsSelect.add(newOption, undefined);
+    })
+}
+
+function displayNewTripFormView() {
+    hideElement(createNewTripViewButton)
+    hideElement(travelerTripsDisplay)
+    showElement(newTripFormView)
+    showElement(viewCurrentTravelerTripsDisplayButton)
+    createDestinationOptionSelections()
+}
+
+function displayEstimatedCostForNewTrip(){
+    if (newTripDate.value === ""|| newTripDuration.value ==="" || newTripDestination.value === "" || newTripNumberOfTravelers ==="") {
+        alert("Form must be completely filled")
+    } else {
+        let newTrip = new Trip(formatNewTripFormPostData(),allDestinations)
+        newTripEstimatedCostDisplay.innerText = `This trip has an estimated cost of :$${newTrip.getTotalTripCost()}`
+    }
+}
+
+function formatNewTripFormPostData() {
+    let newDate = new Date(newTripDate.value)
+    let dd = String(newDate.getDate()).padStart(2, '0');
+    let mm = String(newDate.getMonth() + 1).padStart(2, '0'); 
+    let reformattedDate = `${newDate.getFullYear()}/${mm}/${dd}`
+    console.log("reformatted date",reformattedDate)
+    let newTripPostData = {
+        id: Number(allTrips.length+1),
+        userID: Number(currentTraveler.userID),
+        destinationID: Number(newTripDestination.value),
+        travelers: Number(newTripNumberOfTravelers.value),
+        date: reformattedDate,
+        duration: Number(newTripDuration.value),
+        status: "pending",
+        suggestedActivities: []
+        }
+
+    return newTripPostData
+}
+
+function postNewTrip(){
+    const postData = formatNewTripFormPostData()
+
+    fetch("http://localhost:3001/api/v1/trips", {
+    method: "POST",
+    body: JSON.stringify(postData),
+    headers: {
+      "Content-Type": "application/json"
+    }
+  })
+  .then(response => {
+    if(response.ok){
+      return response.json()
+    } else {
+      throw new Error('Something went wrong with the server!!!!!')
+    }
+  })
+  .then(fetchApiCalls())
+  .catch(error => {
+    console.error(error.message)
+  })
+}
+
+function displayCurrentTravelerTripsView() {
+    hideElement(viewCurrentTravelerTripsDisplayButton)
+    hideElement(newTripFormView)
+    showElement(travelerTripsDisplay)
+    showElement(createNewTripViewButton)
+}
 //event listeners here
 window.addEventListener("load", fetchApiCalls())
+
+createNewTripViewButton.addEventListener('click', (e) => {
+    e.preventDefault();
+    displayNewTripFormView()
+})
+
+viewCurrentTravelerTripsDisplayButton.addEventListener('click', (e)=>{
+    e.preventDefault()
+    displayCurrentTravelerTripsView()
+})
+
+getNewTripEstimatedCostButton.addEventListener('click', (e)=> {
+    e.preventDefault()
+    displayEstimatedCostForNewTrip()
+})
+
+newTripForm.addEventListener('submit', (e)=> {
+    e.preventDefault()
+    postNewTrip()
+    displayCurrentTravelerTripsView()
+})

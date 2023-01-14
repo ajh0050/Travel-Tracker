@@ -20,6 +20,7 @@
   height: 10vh;
   display: flex;
   justify-content: space-between;
+  border-bottom: solid 2px;
 }
 
 .traveler-main-display{
@@ -70,4 +71,8 @@
   border: solid 1px;
   margin: 10px;
   border-radius: 5px;
+}
+
+.hidden {
+  display: none;
 }
