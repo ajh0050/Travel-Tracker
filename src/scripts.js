@@ -157,6 +157,10 @@ function displayEstimatedCostForNewTrip(){
     }
 }
 
+function resetEstimatedCostForNewTrip() {
+    newTripEstimatedCostDisplay.innerText = `This trip has an estimated cost of :`
+}
+
 function formatNewTripFormPostData() {
     let newDate = new Date(newTripDate.value)
     let dd = String(newDate.getDate()).padStart(2, '0');
@@ -239,5 +243,5 @@ newTripForm.addEventListener('submit', (e)=> {
     e.preventDefault()
     postNewTrip()
     newTripForm.reset()
-
+    resetEstimatedCostForNewTrip()
 })

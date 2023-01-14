@@ -79,9 +79,13 @@
   width: 150px;
   border: solid 1px;
   margin: 10px;
-  border-radius: 5px;
+  border-radius: 20px;
   box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
+  overflow:hidden;
+}
 
+.card-image {
+  height: 125px;
 }
 
 .hidden {

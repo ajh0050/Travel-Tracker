@@ -1,7 +1,7 @@
 function tripCardHTML(trip, tripDate) {
     return `
     <article class="trip-card">
-          <img class="card-image" src=${trip.destinationImage} alt=${trip.destinationImageAltText} style="width:100%">
+          <img class="card-image" src=${trip.destinationImage} alt=${trip.destinationImageAltText} >
           <div class="card-footer-container">
             <h4 class="trip-card-label">${trip.destinationName}</h4>
             <p class="trip-card-info">
