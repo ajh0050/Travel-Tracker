@@ -16,18 +16,24 @@
 }
 
 .traveler-header{
-  width: 100vw;
-  height: 10vh;
   display: flex;
+  width: 100vw;
+  height: 20vh;
   justify-content: space-between;
   border-bottom: solid 2px;
+  background-image: url(https://thumbs.dreamstime.com/z/flying-plane-blue-sky-banner-background-tropical-leaves-toy-hand-flies-to-travel-summer-vacation-relaxation-tours-222613249.jpg);
+
+}
+
+.welcome-text {
+  height:20vh;
 }
 
 .traveler-main-display{
   display: flex;
   flex-direction: column;
   width:100vw;
-  height: 80vh;
+  /* height: 80vh; */
 }
 
 .current-traveler-pending-trips-container{

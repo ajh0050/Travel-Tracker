@@ -95,7 +95,7 @@ function displayCurrentTravelerPendingTrips() {
                   <div class="card-footer-container">
                     <h4 class="trip-card-label">${trip.destinationName}</h4>
                     <p class="trip-card-info">
-                    Date: ${trip.date.getDay()}/${trip.date.getMonth()}/${trip.date.getFullYear()} <br>
+                    Date: ${formatDateToHumanReadableVersion(trip.date)} <br>
                     Duration: ${trip.numberOfDays} days <br>
                     Travelers: ${trip.numberOfTravelers} <br>
                     Total Trip Cost: $${trip.totalTripCost} <br>
@@ -124,7 +124,7 @@ function displayCurrentTravelerUpcomingTrips() {
                   <div class="card-footer-container">
                     <h4 class="trip-card-label">${trip.destinationName}</h4>
                     <p class="trip-card-info">
-                    Date: ${trip.date.getDay()}/${trip.date.getMonth()}/${trip.date.getFullYear()} <br>
+                    Date: ${formatDateToHumanReadableVersion(trip.date)} <br>
                     Duration: ${trip.numberOfDays} days <br>
                     Travelers: ${trip.numberOfTravelers} <br>
                     Total Trip Cost: $${trip.totalTripCost} <br>
@@ -152,7 +152,7 @@ function displayCurrentTravelerPastTrips() {
                   <div class="card-footer-container">
                     <h4 class="trip-card-label">${trip.destinationName}</h4>
                     <p class="trip-card-info">
-                    Date: ${trip.date.getDay()}/${trip.date.getMonth()}/${trip.date.getFullYear()} <br>
+                    Date: ${formatDateToHumanReadableVersion(trip.date)} <br>
                     Duration: ${trip.numberOfDays} days <br>
                     Travelers: ${trip.numberOfTravelers} <br>
                     Total Trip Cost: $${trip.totalTripCost} <br>
@@ -200,7 +200,6 @@ function formatNewTripFormPostData() {
     let dd = String(newDate.getDate()).padStart(2, '0');
     let mm = String(newDate.getMonth() + 1).padStart(2, '0'); 
     let reformattedDate = `${newDate.getFullYear()}/${mm}/${dd}`
-    console.log("reformatted date",reformattedDate)
     let newTripPostData = {
         id: Number(allTrips.length+1),
         userID: Number(currentTraveler.userID),
@@ -213,6 +212,14 @@ function formatNewTripFormPostData() {
         }
 
     return newTripPostData
+}
+
+function formatDateToHumanReadableVersion(unreadableDate) {
+    let newDate = new Date(unreadableDate)
+    let dd = String(newDate.getDate()).padStart(2, '0');
+    let mm = String(newDate.getMonth() + 1).padStart(2, '0'); 
+    let reformattedDate = `${mm}/${dd}/${newDate.getFullYear()}`
+    return reformattedDate
 }
 
 function postNewTrip(){
@@ -247,6 +254,7 @@ function displayCurrentTravelerTripsView() {
     showElement(travelerTripsDisplay)
     showElement(createNewTripViewButton)
 }
+
 //event listeners here
 window.addEventListener("load", fetchApiCalls())
 
@@ -268,4 +276,6 @@ getNewTripEstimatedCostButton.addEventListener('click', (e)=> {
 newTripForm.addEventListener('submit', (e)=> {
     e.preventDefault()
     postNewTrip()
+    newTripForm.reset()
+
 })

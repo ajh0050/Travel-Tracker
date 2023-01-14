@@ -12,9 +12,9 @@
     <section class="traveler-dashboard-view"> 
       <header class="traveler-header">
         <p class="welcome-text"></p>
-        <p class="total-spent-this-year"></p>
         <button class="create-new-trip-view-button">Request A New Trip</button>
         <button class="view-trips-display-button hidden">View Your Trips</button>
+        <p class="total-spent-this-year"></p>
       </header>
       <section class="traveler-trips-display">
         <section class="current-traveler-pending-trips-container">
@@ -35,18 +35,20 @@
       <section class="new-trip-form-view hidden">
         <h3 class="new-trip-form-title">What are the details of your trip?</h3>
         <form class="new-trip-form">
-          <label for="newTripDate">What date will the trip begin?</label>
-          <input type="date" id="newTripDate" name="tripDate" required>
-          <label for="newTripDuration">How many days will this trip last?</label>
-          <input type="number" id="newTripDuration" name="tripDuration" min="0" required>
-          <label for="newTripNumberOfTravelers">How many days will this trip last?</label>
-          <input type="number" id="newTripNumberOfTravelers" name="newTripNumberOfTravelers" min="0" required>
-          <label for="newTripDestination">What is your destination?</label>
-          <select name="destinations" id="newTripDestination" size="6" required></select>
-          <input type="submit" value="Submit">
+          <label for="newTripDate">What date will the trip begin?</label><br>
+          <input type="date" id="newTripDate" name="tripDate" required> <br>
+          <label for="newTripDuration">How many days will this trip last?</label> <br>
+          <input type="number" id="newTripDuration" name="tripDuration" min="0" required> <br>
+          <label for="newTripNumberOfTravelers">How many days will this trip last?</label> <br>
+          <input type="number" id="newTripNumberOfTravelers" name="newTripNumberOfTravelers" min="0" required> <br>
+          <label for="newTripDestination">What is your destination?</label><br>
+          <select name="destinations" id="newTripDestination" size="1" required> </select> <br>
+          
+          <button class="view-estimated-trip-cost-button">Get estimated trip cost</button>
+          <p class="estimated-new-trip-cost-display">This trip has an estimated cost of :</p>
+          <input type="submit" value="Submit"> <br>
+
         </form>
-        <button class="view-estimated-trip-cost-button">Get estimated trip cost</button>
-        <p class="estimated-new-trip-cost-display">This trip has an estimated cost of :</p>
       </section>
     </section>
   </main>
