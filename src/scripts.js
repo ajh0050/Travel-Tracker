@@ -55,9 +55,9 @@ function fetchApiCalls() {
     )
 
 }
-function generateRandomIndex() {
-    return Math.floor(Math.random() * allTravelers.length);
-}
+// function generateRandomIndex() {
+//     return Math.floor(Math.random() * allTravelers.length);
+// }
 
 function hideElement (hideThis) {
     hideThis.classList.add("hidden")
@@ -70,7 +70,6 @@ function showElement (showThis) {
 function loadHandler() {
     currentTraveler = new Traveler(allTravelers[2], allTrips)
     displayCurrentTravelerTrips()
-    console.log(currentTraveler)
 }
 
 function displayCurrentTravelerTrips() {
@@ -89,7 +88,6 @@ function displayCurrentTravelerPendingTrips() {
     pendingTripsOfCurrentTraveler.innerHTML = ``;
     if (currentTraveler.getPendingTrips().length > 0) {
         currentTraveler.getPendingTrips().forEach((trip) => {
-            console.log("is this happening")
             pendingTripsOfCurrentTraveler.innerHTML += tripCardHTML(trip, formatDateToHumanReadableVersion(trip.date))
         })
     }
