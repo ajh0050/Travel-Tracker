@@ -34,6 +34,15 @@
   margin: 10px;
 }
 
+.sign-out-button-container{
+  display:flex;
+  justify-content:flex-end;
+}
+
+.sign-out-button {
+  margin-right: 25px;
+}
+
 .header-button {
   margin-top: 30px;
   height: 35px;
@@ -41,6 +50,7 @@
   font-weight: bold;
   border-radius: 15px;
   box-shadow: 3px 3px 3px black;
+  opacity: .7;
 }
 
 .total-spent-this-year{
@@ -50,9 +60,11 @@
 .traveler-trips-display{
   display: flex;
   flex-direction: column;
-  width:100vw;
+  min-height: 80vh;
+  overflow-y:auto;
   background: rgb(108,155,186);
   background: linear-gradient(360deg, rgba(108,155,186,1) 0%, rgba(169,198,217,1) 39%, rgba(247,228,191,1) 100%);
+  background-size: cover;
 }
 
 .trips-row{
@@ -129,6 +141,14 @@
   display: flex;
   justify-content: center;
   align-items: center;
+}
+
+.pointer-on-hover:hover {
+  cursor:pointer;
+}
+
+button:hover {
+  cursor:pointer;
 }
 .hidden {
   display: none;
