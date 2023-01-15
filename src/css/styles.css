@@ -55,19 +55,10 @@
   background: linear-gradient(360deg, rgba(108,155,186,1) 0%, rgba(169,198,217,1) 39%, rgba(247,228,191,1) 100%);
 }
 
-.current-traveler-pending-trips-container{
+.trips-row{
   display:flex;
   flex-direction: column;
-}
-
-.current-traveler-upcoming-trips-container{
-  display:flex;
-  flex-direction: column;
-}
-
-.current-traveler-past-trips-container{
-  display:flex;
-  flex-direction: column;
+  margin:10px;
 }
 
 .current-traveler-past-trips{
