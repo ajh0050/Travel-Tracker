@@ -226,8 +226,7 @@ function displayCurrentTravelerTripsView() {
 function getTravelerIdFromLogin(){
     let travelerID = username.value.replace('traveler', '')
     let traveler = allTravelers.find((traveler) => traveler.id === Number(travelerID))
-    console.log(traveler)
-    return traveler
+    currentTraveler = new Traveler(traveler, allTrips)
 }
 
 //event listeners here
@@ -258,4 +257,6 @@ newTripForm.addEventListener('submit', (e)=> {
 loginForm.addEventListener('submit', (e) => {
     e.preventDefault();
     getTravelerIdFromLogin()
+    displayCurrentTravelerTrips()
+    displayCurrentTravelerTripsView()
 })
