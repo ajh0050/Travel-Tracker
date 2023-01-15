@@ -28,10 +28,13 @@ const newTripDuration = document.querySelector('#newTripDuration')
 const newTripDestination = document.querySelector('#newTripDestination')
 const newTripNumberOfTravelers = document.querySelector('#newTripNumberOfTravelers')
 
+const loginForm = document.querySelector('.login-form')
+const username = document.querySelector('#loginUsername')
+
 const travelerDashboardView = document.querySelector('.traveler-dashboard-view')
 const travelerTripsDisplay = document.querySelector('.traveler-trips-display')
 const newTripFormView = document.querySelector('.new-trip-form-view')
-
+const loginView = document.querySelector('.login-view')
 // global variables used for data model here
 let allTravelers
 let allTrips
@@ -55,9 +58,6 @@ function fetchApiCalls() {
     )
 
 }
-// function generateRandomIndex() {
-//     return Math.floor(Math.random() * allTravelers.length);
-// }
 
 function hideElement (hideThis) {
     hideThis.classList.add("hidden")
@@ -73,6 +73,7 @@ function loadHandler() {
 }
 
 function displayCurrentTravelerTrips() {
+    //paints display for everything in traveler dashboard view including header
     displayCurrentTravelerPendingTrips()
     displayCurrentTravelerUpcomingTrips()
     displayCurrentTravelerPastTrips()
@@ -217,6 +218,16 @@ function displayCurrentTravelerTripsView() {
     hideElement(newTripFormView)
     showElement(travelerTripsDisplay)
     showElement(createNewTripViewButton)
+
+    hideElement(loginView)
+    showElement(travelerDashboardView)
+}
+
+function getTravelerIdFromLogin(){
+    let travelerID = username.value.replace('traveler', '')
+    let traveler = allTravelers.find((traveler) => traveler.id === Number(travelerID))
+    console.log(traveler)
+    return traveler
 }
 
 //event listeners here
@@ -242,4 +253,9 @@ newTripForm.addEventListener('submit', (e)=> {
     postNewTrip()
     newTripForm.reset()
     resetEstimatedCostForNewTrip()
+})
+
+loginForm.addEventListener('submit', (e) => {
+    e.preventDefault();
+    getTravelerIdFromLogin()
 })

@@ -122,6 +122,14 @@
   box-shadow: 3px 3px 3px black;
 }
 
+.login-view {
+  background-color: #4a4f52;
+  height:100vh;
+  width:100vw;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
 .hidden {
   display: none;
 }
