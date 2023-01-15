@@ -34,11 +34,13 @@
   margin: 10px;
 }
 
-.create-new-trip-view-button {
+.header-button {
   margin-top: 30px;
   height: 35px;
   width: 160px;
   font-weight: bold;
+  border-radius: 15px;
+  box-shadow: 3px 3px 3px black;
 }
 
 .total-spent-this-year{
@@ -49,7 +51,6 @@
   display: flex;
   flex-direction: column;
   width:100vw;
-  /* height: 80vh; */
   background: rgb(108,155,186);
   background: linear-gradient(360deg, rgba(108,155,186,1) 0%, rgba(169,198,217,1) 39%, rgba(247,228,191,1) 100%);
 }
@@ -101,6 +102,33 @@
 
 .card-image {
   height: 125px;
+}
+
+.new-trip-form-view{
+  height:80vh;
+  display: flex;
+  flex-direction: column;
+  width:100vw;
+  background: rgb(108,155,186);
+  background: linear-gradient(360deg, rgba(108,155,186,1) 0%, rgba(169,198,217,1) 39%, rgba(247,228,191,1) 100%);
+}
+
+.new-trip-form-title{
+  margin-left: 10px;
+  margin-top: 10px;
+}
+
+.new-trip-form {
+  margin:10px;
+}
+
+.form-button {
+  height: 35px;
+  width: 160px;
+  font-weight: bold;
+  margin: 5px;
+  border-radius: 15px;
+  box-shadow: 3px 3px 3px black;
 }
 
 .hidden {
