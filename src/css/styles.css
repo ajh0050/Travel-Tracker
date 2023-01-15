@@ -25,30 +25,40 @@
 
 }
 
-.welcome-text {
+.welcome-text-container{
   height:20vh;
 }
 
-.traveler-main-display{
+.welcome-text {
+  font-size: 1.5rem;
+  margin: 10px;
+}
+
+.header-button {
+  margin-top: 30px;
+  height: 35px;
+  width: 160px;
+  font-weight: bold;
+  border-radius: 15px;
+  box-shadow: 3px 3px 3px black;
+}
+
+.total-spent-this-year{
+  margin: 20px;
+}
+
+.traveler-trips-display{
   display: flex;
   flex-direction: column;
   width:100vw;
-  /* height: 80vh; */
+  background: rgb(108,155,186);
+  background: linear-gradient(360deg, rgba(108,155,186,1) 0%, rgba(169,198,217,1) 39%, rgba(247,228,191,1) 100%);
 }
 
-.current-traveler-pending-trips-container{
+.trips-row{
   display:flex;
   flex-direction: column;
-}
-
-.current-traveler-upcoming-trips-container{
-  display:flex;
-  flex-direction: column;
-}
-
-.current-traveler-past-trips-container{
-  display:flex;
-  flex-direction: column;
+  margin:10px;
 }
 
 .current-traveler-past-trips{
@@ -73,10 +83,43 @@
   display: flex;
   flex-direction: column;
   height: 300px;
-  width: 150px;
+  width: 200px;
   border: solid 1px;
   margin: 10px;
-  border-radius: 5px;
+  border-radius: 20px;
+  box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
+  overflow:hidden;
+}
+
+.card-image {
+  height: 125px;
+}
+
+.new-trip-form-view{
+  height:80vh;
+  display: flex;
+  flex-direction: column;
+  width:100vw;
+  background: rgb(108,155,186);
+  background: linear-gradient(360deg, rgba(108,155,186,1) 0%, rgba(169,198,217,1) 39%, rgba(247,228,191,1) 100%);
+}
+
+.new-trip-form-title{
+  margin-left: 10px;
+  margin-top: 10px;
+}
+
+.new-trip-form {
+  margin:10px;
+}
+
+.form-button {
+  height: 35px;
+  width: 160px;
+  font-weight: bold;
+  margin: 5px;
+  border-radius: 15px;
+  box-shadow: 3px 3px 3px black;
 }
 
 .hidden {

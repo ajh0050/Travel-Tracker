@@ -6,6 +6,7 @@ import Trip from './Trip'
 import Traveler from './Traveler'
 import './images/turing-logo.png'
 import returnDataPromises from './fetchData';
+import tripCardHTML from './trip-card-html';
 
 
 // query selectors go here
@@ -89,20 +90,7 @@ function displayCurrentTravelerPendingTrips() {
     if (currentTraveler.getPendingTrips().length > 0) {
         currentTraveler.getPendingTrips().forEach((trip) => {
             console.log("is this happening")
-            pendingTripsOfCurrentTraveler.innerHTML += `
-            <article class="trip-card">
-                  <img class="card-image" src=${trip.destinationImage} alt=${trip.destinationImageAltText} style="width:100%">
-                  <div class="card-footer-container">
-                    <h4 class="trip-card-label">${trip.destinationName}</h4>
-                    <p class="trip-card-info">
-                    Date: ${formatDateToHumanReadableVersion(trip.date)} <br>
-                    Duration: ${trip.numberOfDays} days <br>
-                    Travelers: ${trip.numberOfTravelers} <br>
-                    Total Trip Cost: $${trip.totalTripCost} <br>
-                    </p> 
-                  </div>
-            </article>
-            `;
+            pendingTripsOfCurrentTraveler.innerHTML += tripCardHTML(trip, formatDateToHumanReadableVersion(trip.date))
         })
     }
     
@@ -118,20 +106,7 @@ function displayCurrentTravelerUpcomingTrips() {
     upcomingTripsOfCurrentTraveler.innerHTML = ``;
     if (currentTraveler.getFutureTrips(todaysDate).length > 0) {
         currentTraveler.getFutureTrips(todaysDate).forEach((trip) => {
-            upcomingTripsOfCurrentTraveler.innerHTML += `
-            <article class="trip-card">
-                  <img class="card-image" src=${trip.destinationImage} alt=${trip.destinationImageAltText} style="width:100%">
-                  <div class="card-footer-container">
-                    <h4 class="trip-card-label">${trip.destinationName}</h4>
-                    <p class="trip-card-info">
-                    Date: ${formatDateToHumanReadableVersion(trip.date)} <br>
-                    Duration: ${trip.numberOfDays} days <br>
-                    Travelers: ${trip.numberOfTravelers} <br>
-                    Total Trip Cost: $${trip.totalTripCost} <br>
-                    </p> 
-                  </div>
-            </article>
-            `;
+            upcomingTripsOfCurrentTraveler.innerHTML += tripCardHTML(trip, formatDateToHumanReadableVersion(trip.date))
         })
     }
     
@@ -146,20 +121,7 @@ function displayCurrentTravelerPastTrips() {
     pastTripsOfCurrentTraveler.innerHTML = ``;
     if (currentTraveler.getPastTrips(todaysDate).length > 0) {
         currentTraveler.getPastTrips(todaysDate).forEach((trip) => {
-            pastTripsOfCurrentTraveler.innerHTML += `
-            <article class="trip-card">
-                  <img class="card-image" src=${trip.destinationImage} alt=${trip.destinationImageAltText} style="width:100%">
-                  <div class="card-footer-container">
-                    <h4 class="trip-card-label">${trip.destinationName}</h4>
-                    <p class="trip-card-info">
-                    Date: ${formatDateToHumanReadableVersion(trip.date)} <br>
-                    Duration: ${trip.numberOfDays} days <br>
-                    Travelers: ${trip.numberOfTravelers} <br>
-                    Total Trip Cost: $${trip.totalTripCost} <br>
-                    </p> 
-                  </div>
-            </article>
-            `;
+            pastTripsOfCurrentTraveler.innerHTML += tripCardHTML(trip, formatDateToHumanReadableVersion(trip.date))
         })
     }
     
@@ -193,6 +155,10 @@ function displayEstimatedCostForNewTrip(){
         let newTrip = new Trip(formatNewTripFormPostData(),allDestinations)
         newTripEstimatedCostDisplay.innerText = `This trip has an estimated cost of :$${newTrip.getTotalTripCost()}`
     }
+}
+
+function resetEstimatedCostForNewTrip() {
+    newTripEstimatedCostDisplay.innerText = `This trip has an estimated cost of :`
 }
 
 function formatNewTripFormPostData() {
@@ -277,5 +243,5 @@ newTripForm.addEventListener('submit', (e)=> {
     e.preventDefault()
     postNewTrip()
     newTripForm.reset()
-
+    resetEstimatedCostForNewTrip()
 })
