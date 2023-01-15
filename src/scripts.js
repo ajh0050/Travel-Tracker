@@ -20,6 +20,7 @@ const newTripEstimatedCostDisplay = document.querySelector(".estimated-new-trip-
 const createNewTripViewButton = document.querySelector('.create-new-trip-view-button')
 const viewCurrentTravelerTripsDisplayButton = document.querySelector('.view-trips-display-button')
 const getNewTripEstimatedCostButton = document.querySelector('.view-estimated-trip-cost-button')
+const signOutButton = document.querySelector('.sign-out-button')
 
 const newTripForm = document.querySelector('.new-trip-form')
 const newTripFormDestinationsSelect = document.querySelector("#newTripDestination")
@@ -28,24 +29,24 @@ const newTripDuration = document.querySelector('#newTripDuration')
 const newTripDestination = document.querySelector('#newTripDestination')
 const newTripNumberOfTravelers = document.querySelector('#newTripNumberOfTravelers')
 
+const loginForm = document.querySelector('.login-form')
+const username = document.querySelector('#loginUsername')
+
 const travelerDashboardView = document.querySelector('.traveler-dashboard-view')
 const travelerTripsDisplay = document.querySelector('.traveler-trips-display')
 const newTripFormView = document.querySelector('.new-trip-form-view')
-
+const loginView = document.querySelector('.login-view')
 // global variables used for data model here
 let allTravelers
 let allTrips
 let allDestinations
-let currentTraveler = {
-    id: 3,
-    name: "Sibby Dawidowitsch",
-    travelerType: "shopper"
-    }
+let currentTraveler = null
+
 let todaysDate = new Date()
 
 //functions here
 function fetchApiCalls() {
-    returnDataPromises().then((data) => {
+    return returnDataPromises().then((data) => {
         allTravelers = data[0].travelers
         allDestinations = data[2].destinations
         allTrips = data[1].trips.map((item) => new Trip(item, allDestinations))
@@ -55,9 +56,6 @@ function fetchApiCalls() {
     )
 
 }
-// function generateRandomIndex() {
-//     return Math.floor(Math.random() * allTravelers.length);
-// }
 
 function hideElement (hideThis) {
     hideThis.classList.add("hidden")
@@ -68,11 +66,27 @@ function showElement (showThis) {
 }
 
 function loadHandler() {
-    currentTraveler = new Traveler(allTravelers[2], allTrips)
+    if (currentTraveler === null) {
+        currentTraveler = new Traveler(allTravelers[2], allTrips)
+    }
+    console.log("allTrips inside of fetchApiCalls",allTrips)
+
     displayCurrentTravelerTrips()
 }
 
 function displayCurrentTravelerTrips() {
+    //paints display for everything in traveler dashboard view including header
+    displayCurrentTravelerPendingTrips()
+    displayCurrentTravelerUpcomingTrips()
+    displayCurrentTravelerPastTrips()
+    displayCurrentTravelerHeader()
+}
+
+function postDisplayCurrentTravelerTrips() {
+    //paints display for everything in traveler dashboard view including header
+    let traveler = allTravelers.find(traveler=> currentTraveler.userID === traveler.id)
+    
+    currentTraveler = new Traveler(traveler, allTrips)
     displayCurrentTravelerPendingTrips()
     displayCurrentTravelerUpcomingTrips()
     displayCurrentTravelerPastTrips()
@@ -204,8 +218,14 @@ function postNewTrip(){
     }
   })
   .then(()=>{
-    fetchApiCalls()
-    displayCurrentTravelerTripsView()
+    fetchApiCalls().then(()=>{
+        postDisplayCurrentTravelerTrips()
+        displayCurrentTravelerTripsView()
+        console.log("allTrips after post",allTrips)
+    })
+
+
+  
 })
   .catch(error => {
     console.error(error.message)
@@ -217,6 +237,21 @@ function displayCurrentTravelerTripsView() {
     hideElement(newTripFormView)
     showElement(travelerTripsDisplay)
     showElement(createNewTripViewButton)
+
+    hideElement(loginView)
+    showElement(travelerDashboardView)
+}
+
+function getTravelerIdFromLogin(){
+    let travelerID = username.value.replace('traveler', '')
+    let traveler = allTravelers.find((traveler) => traveler.id === Number(travelerID))
+
+    currentTraveler = new Traveler(traveler, allTrips)
+}
+
+function displayLoginPage(){
+    showElement(loginView)
+    hideElement(travelerDashboardView)
 }
 
 //event listeners here
@@ -242,4 +277,18 @@ newTripForm.addEventListener('submit', (e)=> {
     postNewTrip()
     newTripForm.reset()
     resetEstimatedCostForNewTrip()
+    displayCurrentTravelerTripsView()
+})
+
+loginForm.addEventListener('submit', (e) => {
+    e.preventDefault();
+    getTravelerIdFromLogin()
+    displayCurrentTravelerTrips()
+    displayCurrentTravelerTripsView()
+    loginForm.reset()
+})
+
+signOutButton.addEventListener('click', (e)=>{
+    e.preventDefault()
+    displayLoginPage()
 })

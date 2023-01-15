@@ -9,7 +9,18 @@
 <body>
   <!-- <img src="./images/turing-logo.png" alt="turing logo"> -->
   <main class="main-content">
-    <section class="traveler-dashboard-view"> 
+    <section class="login-view">
+      <form class="login-form">
+        <label for="username">Username:</label>
+        <input type="text" id="loginUsername" name="login" required> <br>
+        <label for="password">Password:</label>
+        <input type="text" id="loginPassword" name="password" required> <br>
+        <input type="submit" value="Login" class="login-button pointer-on-hover"> <br>
+      </form>
+
+    </section>
+
+    <section class="traveler-dashboard-view hidden"> 
       <header class="traveler-header">
         <div class="welcome-text-container">
           <p class="welcome-text"></p>
@@ -17,6 +28,9 @@
         <button class="create-new-trip-view-button header-button">Request A New Trip</button>
         <button class="view-trips-display-button header-button hidden">View Your Trips</button>
         <div class="total-spent-this-year-container">
+          <div class="sign-out-button-container">
+            <button class="sign-out-button">Sign Out</button>
+          </div>
           <p class="total-spent-this-year"></p>
         </div>
       </header>
@@ -40,17 +54,17 @@
         <h3 class="new-trip-form-title">What are the details of your trip?</h3>
         <form class="new-trip-form">
           <label for="newTripDate">What date will the trip begin?</label><br>
-          <input type="date" id="newTripDate" name="tripDate" required> <br>
+          <input type="date" id="newTripDate" class="pointer-on-hover" name="tripDate" required> <br>
           <label for="newTripDuration">How many days will this trip last?</label> <br>
           <input type="number" id="newTripDuration" name="tripDuration" min="0" required> <br>
           <label for="newTripNumberOfTravelers">How many days will this trip last?</label> <br>
           <input type="number" id="newTripNumberOfTravelers" name="newTripNumberOfTravelers" min="0" required> <br>
           <label for="newTripDestination">What is your destination?</label><br>
-          <select name="destinations" id="newTripDestination" size="1" required> </select> <br>
+          <select name="destinations" id="newTripDestination" class="pointer-on-hover" size="1" required> </select> <br>
           
           <button class="view-estimated-trip-cost-button form-button">Get estimated trip cost</button>
           <p class="estimated-new-trip-cost-display"></p>
-          <input type="submit" value="Submit" class="form-button"> <br>
+          <input type="submit" value="Submit" class="form-button pointer-on-hover"> <br>
 
         </form>
       </section>
