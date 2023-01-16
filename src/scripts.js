@@ -210,18 +210,24 @@ function postNewTrip() {
         }
     })
         .then(response => {
+            let responseCode = String(response.status)[0]
             if (response.ok) {
                 console.log(response.status)
                 return response.json()
-            } else {
-                console.log(response.status)
+            } else if (responseCode === '4'){
                 console.error(response)
-                throw new Error('Server is down')
+                alert('Something went wrong, please try again.')
+                throw new Error('4xx level response code error')
+            } else if (responseCode === '5'){
+                console.error(response)
+                alert('The server is down please try again later')
+                throw new Error('5xx level response code error')
+            } else {
+                throw new Error('Something outside of a 4xx or 5xx error happened')
             }
         })
         .then(() => {
             fetchApiCalls().then(() => {
-                console.log('posted from line 225')
                 postDisplayCurrentTravelerTrips()
                 displayCurrentTravelerTripsView()
                 newTripForm.reset()
