@@ -253,6 +253,15 @@ function validatePassword(password) {
    return password.value === 'travel' ? true : false
 }
 
+function validateUsername(username) {
+    let travelerID = username.value.replace('traveler', '')
+    let traveler = allTravelers.find((traveler) => traveler.id === Number(travelerID))
+    if (traveler === undefined) {
+        return false 
+    } else {
+        return true
+    }
+}
 //event listeners here
 window.addEventListener("load", fetchApiCalls())
 
@@ -281,15 +290,14 @@ newTripForm.addEventListener('submit', (e)=> {
 
 loginForm.addEventListener('submit', (e) => {
     e.preventDefault()
-   if (validatePassword(password)) {
+   if (validatePassword(password) && validateUsername(username)) {
     getTravelerIdFromLogin()
     displayCurrentTravelerTrips()
     displayCurrentTravelerTripsView()
     loginForm.reset()
    } else {
-    loginErrorMessage.innerText = `wrong password`
+    loginErrorMessage.innerText = `wrong info`
    }
-
 })
 
 signOutButton.addEventListener('click', (e)=>{
