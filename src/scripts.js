@@ -89,7 +89,7 @@ function postDisplayCurrentTravelerTrips() {
 
 function displayCurrentTravelerHeader() {
     welcomeText.innerHTML = `Welcome ${currentTraveler.name}`
-    totalSpentThisYearOnTrips.innerHTML = `Total Spent On Trips This Year: $${currentTraveler.getTotalAmountSpentThisYear(todaysDate.getFullYear())}`
+    totalSpentThisYearOnTrips.innerHTML = `Total Spent On Trips This Year: $${currentTraveler.getTotalAmountSpentThisYear(todaysDate.getFullYear()).toLocaleString("en-US")}`
 }
 
 function displayCurrentTravelerPendingTrips() {
@@ -159,12 +159,12 @@ function displayEstimatedCostForNewTrip() {
         alert("Form must be completely filled")
     } else {
         let newTrip = new Trip(formatNewTripFormPostData(), allDestinations)
-        newTripEstimatedCostDisplay.innerText = `This trip has an estimated cost of :$${newTrip.getTotalTripCost()}`
+        newTripEstimatedCostDisplay.innerText = `This trip has an estimated cost of :$${newTrip.getTotalTripCost().toLocaleString("en-US")}`
     }
 }
 
 function resetEstimatedCostForNewTrip() {
-    newTripEstimatedCostDisplay.innerText = `This trip has an estimated cost of :`
+    newTripEstimatedCostDisplay.innerText = ``
 }
 
 function formatNewTripFormPostData() {

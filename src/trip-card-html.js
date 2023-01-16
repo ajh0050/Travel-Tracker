@@ -6,9 +6,9 @@ function tripCardHTML(trip, tripDate) {
             <h4 class="trip-card-label">${trip.destinationName}</h4>
             <p class="trip-card-info">
             Date: ${tripDate} <br>
-            Duration: ${trip.numberOfDays} days <br>
-            Travelers: ${trip.numberOfTravelers} <br>
-            Total Trip Cost: $${trip.totalTripCost} <br>
+            Duration: ${trip.numberOfDays.toLocaleString("en-US")} days <br>
+            Travelers: ${trip.numberOfTravelers.toLocaleString("en-US")} <br>
+            Total Trip Cost: $${trip.totalTripCost.toLocaleString("en-US")} <br>
             </p> 
           </div>
     </article>
