@@ -13,8 +13,8 @@ class Trip {
         this.destinationName = this.destination.destination
         this.estimatedLodgingCostPerDay = this.destination.estimatedLodgingCostPerDay
         this.estimatedFlightCostPerPerson = this.destination.estimatedFlightCostPerPerson
-        this.destinationImage = this.destination.image 
-        this.destinationImageAltText = this.destination.alt 
+        this.destinationImage = this.destination.image
+        this.destinationImageAltText = this.destination.alt
         this.costPerPerson = this.getCostPerPerson()
         this.totalTripCost = this.getTotalTripCost()
     }
