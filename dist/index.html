@@ -1,13 +1,14 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
   <meta charset="UTF-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Adam's Travel Tracker</title>
 </head>
+
 <body>
-  <!-- <img src="./images/turing-logo.png" alt="turing logo"> -->
   <main class="main-content">
     <section class="login-view">
       <form class="login-form">
@@ -20,7 +21,7 @@
       </form> <br>
     </section>
 
-    <section class="traveler-dashboard-view hidden"> 
+    <section class="traveler-dashboard-view hidden">
       <header class="traveler-header">
         <div class="welcome-text-container">
           <p class="welcome-text"></p>
@@ -50,7 +51,7 @@
           <section class="current-traveler-past-trips"></section>
         </section>
       </section>
-      <section class="new-trip-form-view hidden" >
+      <section class="new-trip-form-view hidden">
         <h3 class="new-trip-form-title">What are the details of your trip?</h3>
         <form class="new-trip-form">
           <label for="newTripDate">What date will the trip begin?</label><br>
@@ -61,16 +62,14 @@
           <input type="number" id="newTripNumberOfTravelers" name="newTripNumberOfTravelers" min="0" required> <br>
           <label for="newTripDestination">What is your destination?</label><br>
           <select name="destinations" id="newTripDestination" class="pointer-on-hover" size="1" required> </select> <br>
-          
           <button class="view-estimated-trip-cost-button form-button">Get estimated trip cost</button>
           <p class="estimated-new-trip-cost-display"></p>
           <input type="submit" value="Submit" class="form-button pointer-on-hover"> <br>
-
         </form>
       </section>
     </section>
   </main>
   <script src="bundle.js"></script>
 </body>
-</html>
 
+</html>
