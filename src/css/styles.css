@@ -1,32 +1,32 @@
-*, html {
-  margin:0;
-  padding:0;  
+*,
+html {
+  margin: 0;
+  padding: 0;
 }
 
-.main-content{
-  display:flex;
+.main-content {
+  display: flex;
   flex-direction: column;
 }
 
 .traveler-dashboard-view {
-  display:flex;
+  display: flex;
   flex-direction: column;
   width: 100vw;
   height: 100vh;
 }
 
-.traveler-header{
+.traveler-header {
   display: flex;
   width: 100vw;
   height: 20vh;
   justify-content: space-between;
   border-bottom: solid 2px;
   background-image: url(https://thumbs.dreamstime.com/z/flying-plane-blue-sky-banner-background-tropical-leaves-toy-hand-flies-to-travel-summer-vacation-relaxation-tours-222613249.jpg);
-
 }
 
-.welcome-text-container{
-  height:20vh;
+.welcome-text-container {
+  height: 20vh;
 }
 
 .welcome-text {
@@ -34,9 +34,9 @@
   margin: 10px;
 }
 
-.sign-out-button-container{
-  display:flex;
-  justify-content:flex-end;
+.sign-out-button-container {
+  display: flex;
+  justify-content: flex-end;
 }
 
 .sign-out-button {
@@ -53,40 +53,40 @@
   opacity: .7;
 }
 
-.total-spent-this-year{
+.total-spent-this-year {
   margin: 20px;
 }
 
-.traveler-trips-display{
+.traveler-trips-display {
   display: flex;
   flex-direction: column;
   min-height: 80vh;
-  overflow-y:auto;
-  background: rgb(108,155,186);
-  background: linear-gradient(360deg, rgba(108,155,186,1) 0%, rgba(169,198,217,1) 39%, rgba(247,228,191,1) 100%);
+  overflow-y: auto;
+  background: rgb(108, 155, 186);
+  background: linear-gradient(360deg, rgba(108, 155, 186, 1) 0%, rgba(169, 198, 217, 1) 39%, rgba(247, 228, 191, 1) 100%);
   background-size: cover;
 }
 
-.trips-row{
-  display:flex;
+.trips-row {
+  display: flex;
   flex-direction: column;
-  margin:10px;
+  margin: 10px;
 }
 
-.current-traveler-past-trips{
-  display:flex;
+.current-traveler-past-trips {
+  display: flex;
   flex-direction: row;
   flex-wrap: wrap;
 }
 
-.current-traveler-future-trips{
-  display:flex;
+.current-traveler-future-trips {
+  display: flex;
   flex-direction: row;
   flex-wrap: wrap;
 }
 
-.current-traveler-pending-trips{
-  display:flex;
+.current-traveler-pending-trips {
+  display: flex;
   flex-direction: row;
   flex-wrap: wrap;
 }
@@ -99,30 +99,30 @@
   border: solid 1px;
   margin: 10px;
   border-radius: 20px;
-  box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
-  overflow:hidden;
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
+  overflow: hidden;
 }
 
 .card-image {
   height: 125px;
 }
 
-.new-trip-form-view{
-  height:80vh;
+.new-trip-form-view {
+  height: 80vh;
   display: flex;
   flex-direction: column;
-  width:100vw;
-  background: rgb(108,155,186);
-  background: linear-gradient(360deg, rgba(108,155,186,1) 0%, rgba(169,198,217,1) 39%, rgba(247,228,191,1) 100%);
+  width: 100vw;
+  background: rgb(108, 155, 186);
+  background: linear-gradient(360deg, rgba(108, 155, 186, 1) 0%, rgba(169, 198, 217, 1) 39%, rgba(247, 228, 191, 1) 100%);
 }
 
-.new-trip-form-title{
+.new-trip-form-title {
   margin-left: 10px;
   margin-top: 10px;
 }
 
 .new-trip-form {
-  margin:10px;
+  margin: 10px;
 }
 
 .form-button {
@@ -136,20 +136,26 @@
 
 .login-view {
   background-color: #4a4f52;
-  height:100vh;
-  width:100vw;
+  height: 100vh;
+  width: 100vw;
   display: flex;
   justify-content: center;
   align-items: center;
 }
 
+.login-error-message {
+  font-size: 1.2rem;
+  color: red
+}
+
 .pointer-on-hover:hover {
-  cursor:pointer;
+  cursor: pointer;
 }
 
 button:hover {
-  cursor:pointer;
+  cursor: pointer;
 }
+
 .hidden {
   display: none;
 }
