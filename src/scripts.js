@@ -54,9 +54,7 @@ function fetchApiCalls() {
         allTrips = data[1].trips.map((item) => new Trip(item, allDestinations))
 
         loadHandler()
-    }
-    )
-
+    })
 }
 
 function hideElement(hideThis) {
@@ -214,11 +212,11 @@ function postNewTrip() {
             if (response.ok) {
                 console.log(response.status)
                 return response.json()
-            } else if (responseCode === '4'){
+            } else if (responseCode === '4') {
                 console.error(response)
                 alert('Something went wrong, please try again.')
                 throw new Error('4xx level response code error')
-            } else if (responseCode === '5'){
+            } else if (responseCode === '5') {
                 console.error(response)
                 alert('The server is down please try again later')
                 throw new Error('5xx level response code error')

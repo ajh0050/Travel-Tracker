@@ -47,11 +47,13 @@ describe('Traveler class', function () {
   it("Should provide a way to access trips that happened in the past", () => {
     let dateToCompare = new Date ("01/15/2021")
     expect(traveler.getPastTrips(dateToCompare)[0]).to.deep.equal(instantiateTrips[1]);
+    expect(traveler.getPastTrips()).to.deep.equal([])
   });
 
   it("Should provide a way to access trips are planned for the future", () => {
     let dateToCompare = new Date ("01/15/2021")
     expect(traveler.getFutureTrips(dateToCompare)[0]).to.deep.equal(instantiateTrips[0]);
+    expect(traveler.getFutureTrips()).to.deep.equal([])
   });
 
   it("Should provide a way to access trips that are pending", () => {
