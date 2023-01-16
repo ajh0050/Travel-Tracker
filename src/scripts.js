@@ -4,7 +4,6 @@
 import './css/styles.css';
 import Trip from './Trip'
 import Traveler from './Traveler'
-import './images/turing-logo.png'
 import returnDataPromises from './fetchData';
 import tripCardHTML from './trip-card-html';
 
@@ -16,6 +15,7 @@ const pendingTripsOfCurrentTraveler = document.querySelector(".current-traveler-
 const upcomingTripsOfCurrentTraveler = document.querySelector(".current-traveler-upcoming-trips")
 const pastTripsOfCurrentTraveler = document.querySelector(".current-traveler-past-trips")
 const newTripEstimatedCostDisplay = document.querySelector(".estimated-new-trip-cost-display")
+const loginErrorMessage = document.querySelector('.login-error-message')
 
 const createNewTripViewButton = document.querySelector('.create-new-trip-view-button')
 const viewCurrentTravelerTripsDisplayButton = document.querySelector('.view-trips-display-button')
@@ -31,6 +31,7 @@ const newTripNumberOfTravelers = document.querySelector('#newTripNumberOfTravele
 
 const loginForm = document.querySelector('.login-form')
 const username = document.querySelector('#loginUsername')
+const password = document.querySelector('#loginPassword')
 
 const travelerDashboardView = document.querySelector('.traveler-dashboard-view')
 const travelerTripsDisplay = document.querySelector('.traveler-trips-display')
@@ -52,16 +53,14 @@ function fetchApiCalls() {
         allTrips = data[1].trips.map((item) => new Trip(item, allDestinations))
 
         loadHandler()
-    }
-    )
-
+    })
 }
 
-function hideElement (hideThis) {
+function hideElement(hideThis) {
     hideThis.classList.add("hidden")
 }
 
-function showElement (showThis) {
+function showElement(showThis) {
     showThis.classList.remove("hidden")
 }
 
@@ -69,13 +68,10 @@ function loadHandler() {
     if (currentTraveler === null) {
         currentTraveler = new Traveler(allTravelers[2], allTrips)
     }
-    console.log("allTrips inside of fetchApiCalls",allTrips)
-
     displayCurrentTravelerTrips()
 }
 
 function displayCurrentTravelerTrips() {
-    //paints display for everything in traveler dashboard view including header
     displayCurrentTravelerPendingTrips()
     displayCurrentTravelerUpcomingTrips()
     displayCurrentTravelerPastTrips()
@@ -83,9 +79,7 @@ function displayCurrentTravelerTrips() {
 }
 
 function postDisplayCurrentTravelerTrips() {
-    //paints display for everything in traveler dashboard view including header
-    let traveler = allTravelers.find(traveler=> currentTraveler.userID === traveler.id)
-    
+    let traveler = allTravelers.find(traveler => currentTraveler.userID === traveler.id)
     currentTraveler = new Traveler(traveler, allTrips)
     displayCurrentTravelerPendingTrips()
     displayCurrentTravelerUpcomingTrips()
@@ -95,7 +89,7 @@ function postDisplayCurrentTravelerTrips() {
 
 function displayCurrentTravelerHeader() {
     welcomeText.innerHTML = `Welcome ${currentTraveler.name}`
-    totalSpentThisYearOnTrips.innerHTML = `Total Spent On Trips This Year: $${currentTraveler.getTotalAmountSpentThisYear(todaysDate.getFullYear())}`
+    totalSpentThisYearOnTrips.innerHTML = `Total Spent On Trips This Year: $${currentTraveler.getTotalAmountSpentThisYear(todaysDate.getFullYear()).toLocaleString("en-US")}`
 }
 
 function displayCurrentTravelerPendingTrips() {
@@ -105,13 +99,13 @@ function displayCurrentTravelerPendingTrips() {
             pendingTripsOfCurrentTraveler.innerHTML += tripCardHTML(trip, formatDateToHumanReadableVersion(trip.date))
         })
     }
-    
-    if(currentTraveler.getPendingTrips().length === 0){
+
+    if (currentTraveler.getPendingTrips().length === 0) {
         pendingTripsOfCurrentTraveler.innerHTML = `
         <p class="empty-section-text">There are currently no pending trips </p>
         `;
     }
-   
+
 }
 
 function displayCurrentTravelerUpcomingTrips() {
@@ -121,8 +115,8 @@ function displayCurrentTravelerUpcomingTrips() {
             upcomingTripsOfCurrentTraveler.innerHTML += tripCardHTML(trip, formatDateToHumanReadableVersion(trip.date))
         })
     }
-    
-    if(currentTraveler.getFutureTrips(todaysDate).length === 0){
+
+    if (currentTraveler.getFutureTrips(todaysDate).length === 0) {
         upcomingTripsOfCurrentTraveler.innerHTML = `
         <p class="empty-section-text">There are currently no upcoming trips </p>
         `;
@@ -136,8 +130,8 @@ function displayCurrentTravelerPastTrips() {
             pastTripsOfCurrentTraveler.innerHTML += tripCardHTML(trip, formatDateToHumanReadableVersion(trip.date))
         })
     }
-    
-    if(currentTraveler.getPastTrips(todaysDate).length === 0){
+
+    if (currentTraveler.getPastTrips(todaysDate).length === 0) {
         pastTripsOfCurrentTraveler.innerHTML = `
         <p class="empty-section-text">There are currently no past trips </p>
         `;
@@ -146,7 +140,7 @@ function displayCurrentTravelerPastTrips() {
 
 function createDestinationOptionSelections() {
     newTripFormDestinationsSelect.innerHTML = ``;
-    allDestinations.forEach((destination)=>{
+    allDestinations.forEach((destination) => {
         let newOption = new Option(destination.destination, destination.id)
         newTripFormDestinationsSelect.add(newOption, undefined);
     })
@@ -160,26 +154,26 @@ function displayNewTripFormView() {
     createDestinationOptionSelections()
 }
 
-function displayEstimatedCostForNewTrip(){
-    if (newTripDate.value === ""|| newTripDuration.value ==="" || newTripDestination.value === "" || newTripNumberOfTravelers ==="") {
+function displayEstimatedCostForNewTrip() {
+    if (newTripDate.value === "" || newTripDuration.value === "" || newTripDestination.value === "" || newTripNumberOfTravelers === "") {
         alert("Form must be completely filled")
     } else {
-        let newTrip = new Trip(formatNewTripFormPostData(),allDestinations)
-        newTripEstimatedCostDisplay.innerText = `This trip has an estimated cost of :$${newTrip.getTotalTripCost()}`
+        let newTrip = new Trip(formatNewTripFormPostData(), allDestinations)
+        newTripEstimatedCostDisplay.innerText = `This trip has an estimated cost of :$${newTrip.getTotalTripCost().toLocaleString("en-US")}`
     }
 }
 
 function resetEstimatedCostForNewTrip() {
-    newTripEstimatedCostDisplay.innerText = `This trip has an estimated cost of :`
+    newTripEstimatedCostDisplay.innerText = ``
 }
 
 function formatNewTripFormPostData() {
     let newDate = new Date(newTripDate.value)
     let dd = String(newDate.getDate()).padStart(2, '0');
-    let mm = String(newDate.getMonth() + 1).padStart(2, '0'); 
+    let mm = String(newDate.getMonth() + 1).padStart(2, '0');
     let reformattedDate = `${newDate.getFullYear()}/${mm}/${dd}`
     let newTripPostData = {
-        id: Number(allTrips.length+1),
+        id: Number(allTrips.length + 1),
         userID: Number(currentTraveler.userID),
         destinationID: Number(newTripDestination.value),
         travelers: Number(newTripNumberOfTravelers.value),
@@ -187,49 +181,57 @@ function formatNewTripFormPostData() {
         duration: Number(newTripDuration.value),
         status: "pending",
         suggestedActivities: []
-        }
-
+    }
     return newTripPostData
 }
 
 function formatDateToHumanReadableVersion(unreadableDate) {
     let newDate = new Date(unreadableDate)
     let dd = String(newDate.getDate()).padStart(2, '0');
-    let mm = String(newDate.getMonth() + 1).padStart(2, '0'); 
+    let mm = String(newDate.getMonth() + 1).padStart(2, '0');
     let reformattedDate = `${mm}/${dd}/${newDate.getFullYear()}`
     return reformattedDate
 }
 
-function postNewTrip(){
+function postNewTrip() {
     const postData = formatNewTripFormPostData()
 
-    fetch("http://localhost:3001/api/v1/trips", {
-    method: "POST",
-    body: JSON.stringify(postData),
-    headers: {
-      "Content-Type": "application/json"
-    }
-  })
-  .then(response => {
-    if(response.ok){
-      return response.json()
-    } else {
-      throw new Error('Something went wrong with the server!!!!!')
-    }
-  })
-  .then(()=>{
-    fetchApiCalls().then(()=>{
-        postDisplayCurrentTravelerTrips()
-        displayCurrentTravelerTripsView()
-        console.log("allTrips after post",allTrips)
+    return fetch("http://localhost:3001/api/v1/trips", {
+        method: "POST",
+        body: JSON.stringify(postData),
+        headers: {
+            "Content-Type": "application/json"
+        }
     })
-
-
-  
-})
-  .catch(error => {
-    console.error(error.message)
-  })
+        .then(response => {
+            let responseCode = String(response.status)[0]
+            if (response.ok) {
+                console.log(response.status)
+                return response.json()
+            } else if (responseCode === '4') {
+                console.error(response)
+                alert('Something went wrong, please try again.')
+                throw new Error('4xx level response code error')
+            } else if (responseCode === '5') {
+                console.error(response)
+                alert('The server is down please try again later')
+                throw new Error('5xx level response code error')
+            } else {
+                throw new Error('Something outside of a 4xx or 5xx error happened')
+            }
+        })
+        .then(() => {
+            fetchApiCalls().then(() => {
+                postDisplayCurrentTravelerTrips()
+                displayCurrentTravelerTripsView()
+                newTripForm.reset()
+                resetEstimatedCostForNewTrip()
+            })
+        })
+        .catch(error => {
+            console.log(error)
+            return alert(`Your trip was not submitted. Please try again later`)
+        })
 }
 
 function displayCurrentTravelerTripsView() {
@@ -242,18 +244,46 @@ function displayCurrentTravelerTripsView() {
     showElement(travelerDashboardView)
 }
 
-function getTravelerIdFromLogin(){
+function getTravelerIdFromLogin() {
     let travelerID = username.value.replace('traveler', '')
     let traveler = allTravelers.find((traveler) => traveler.id === Number(travelerID))
 
     currentTraveler = new Traveler(traveler, allTrips)
 }
 
-function displayLoginPage(){
+function displayLoginPage() {
     showElement(loginView)
     hideElement(travelerDashboardView)
 }
 
+function validatePassword(password) {
+    return password.value === 'travel' ? true : false
+}
+
+function validateUsername(username) {
+    let travelerID = username.value.replace('traveler', '')
+    let traveler = allTravelers.find((traveler) => traveler.id === Number(travelerID))
+    if (traveler === undefined) {
+        return false
+    } else {
+        return true
+    }
+}
+
+function validateAndSubmitLogin() {
+    if (validatePassword(password) && validateUsername(username)) {
+        getTravelerIdFromLogin()
+        displayCurrentTravelerTrips()
+        displayCurrentTravelerTripsView()
+        loginForm.reset()
+    } else if (validatePassword(password) === false && validateUsername(username)) {
+        loginErrorMessage.innerText = `wrong password`
+    } else if (validatePassword(password) && validateUsername(username) === false) {
+        loginErrorMessage.innerText = `wrong username`
+    } else {
+        loginErrorMessage.innerText = `wrong username and password`
+    }
+}
 //event listeners here
 window.addEventListener("load", fetchApiCalls())
 
@@ -262,33 +292,27 @@ createNewTripViewButton.addEventListener('click', (e) => {
     displayNewTripFormView()
 })
 
-viewCurrentTravelerTripsDisplayButton.addEventListener('click', (e)=>{
+viewCurrentTravelerTripsDisplayButton.addEventListener('click', (e) => {
     e.preventDefault()
     displayCurrentTravelerTripsView()
 })
 
-getNewTripEstimatedCostButton.addEventListener('click', (e)=> {
+getNewTripEstimatedCostButton.addEventListener('click', (e) => {
     e.preventDefault()
     displayEstimatedCostForNewTrip()
 })
 
-newTripForm.addEventListener('submit', (e)=> {
+newTripForm.addEventListener('submit', (e) => {
     e.preventDefault()
     postNewTrip()
-    newTripForm.reset()
-    resetEstimatedCostForNewTrip()
-    displayCurrentTravelerTripsView()
 })
 
 loginForm.addEventListener('submit', (e) => {
-    e.preventDefault();
-    getTravelerIdFromLogin()
-    displayCurrentTravelerTrips()
-    displayCurrentTravelerTripsView()
-    loginForm.reset()
+    e.preventDefault()
+    validateAndSubmitLogin()
 })
 
-signOutButton.addEventListener('click', (e)=>{
+signOutButton.addEventListener('click', (e) => {
     e.preventDefault()
     displayLoginPage()
 })

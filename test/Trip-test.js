@@ -1,6 +1,6 @@
 import { expect } from 'chai';
 import Trip from '../src/Trip';
-import { tripsData,destinationsData } from './testData';
+import { tripsData, destinationsData } from './testData';
 
 describe('Traveler class', function () {
   let trip
@@ -79,7 +79,7 @@ describe('Traveler class', function () {
   it("Should be a property to store url of destination image", () => {
     expect(trip.destinationImage).to.equal("https://images.unsplash.com/photo-1515542622106-78bda8ba0e5b?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1950&q=80");
   });
-  
+
   it("Should be a property to store alt text for destination image", () => {
     expect(trip.destinationImageAltText).to.equal("people standing inside a colosseum during the day");
   });
