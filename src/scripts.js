@@ -295,8 +295,13 @@ loginForm.addEventListener('submit', (e) => {
     displayCurrentTravelerTrips()
     displayCurrentTravelerTripsView()
     loginForm.reset()
+   } else if (validatePassword(password) === false && validateUsername(username)) {
+    loginErrorMessage.innerText = `wrong password`
+   } else if (validatePassword(password)  && validateUsername(username) === false) {
+    loginErrorMessage.innerText = `wrong username`
    } else {
-    loginErrorMessage.innerText = `wrong info`
+    loginErrorMessage.innerText = `wrong username and password`
+
    }
 })
 
