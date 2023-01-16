@@ -1,6 +1,6 @@
 import { expect } from 'chai';
 import Traveler from '../src/Traveler';
-import { tripsData,destinationsData } from './testData';
+import { tripsData, destinationsData } from './testData';
 import Trip from '../src/Trip';
 
 describe('Traveler class', function () {
@@ -12,7 +12,7 @@ describe('Traveler class', function () {
       name: "Sibby Dawidowitsch",
       travelerType: "shopper"
     }
-    instantiateTrips = tripsData.map((item) => new Trip (item, destinationsData))
+    instantiateTrips = tripsData.map((item) => new Trip(item, destinationsData))
     traveler = new Traveler(currentTraveler, instantiateTrips)
   });
 
@@ -45,13 +45,13 @@ describe('Traveler class', function () {
   });
 
   it("Should provide a way to access trips that happened in the past", () => {
-    let dateToCompare = new Date ("01/15/2021")
+    let dateToCompare = new Date("01/15/2021")
     expect(traveler.getPastTrips(dateToCompare)[0]).to.deep.equal(instantiateTrips[1]);
     expect(traveler.getPastTrips()).to.deep.equal([])
   });
 
   it("Should provide a way to access trips are planned for the future", () => {
-    let dateToCompare = new Date ("01/15/2021")
+    let dateToCompare = new Date("01/15/2021")
     expect(traveler.getFutureTrips(dateToCompare)[0]).to.deep.equal(instantiateTrips[0]);
     expect(traveler.getFutureTrips()).to.deep.equal([])
   });
