@@ -4,7 +4,6 @@
 import './css/styles.css';
 import Trip from './Trip'
 import Traveler from './Traveler'
-import './images/turing-logo.png'
 import returnDataPromises from './fetchData';
 import tripCardHTML from './trip-card-html';
 
@@ -69,7 +68,6 @@ function loadHandler() {
     if (currentTraveler === null) {
         currentTraveler = new Traveler(allTravelers[2], allTrips)
     }
-
     displayCurrentTravelerTrips()
 }
 
@@ -82,7 +80,6 @@ function displayCurrentTravelerTrips() {
 
 function postDisplayCurrentTravelerTrips() {
     let traveler = allTravelers.find(traveler => currentTraveler.userID === traveler.id)
-
     currentTraveler = new Traveler(traveler, allTrips)
     displayCurrentTravelerPendingTrips()
     displayCurrentTravelerUpcomingTrips()
@@ -185,7 +182,6 @@ function formatNewTripFormPostData() {
         status: "pending",
         suggestedActivities: []
     }
-
     return newTripPostData
 }
 
@@ -273,6 +269,21 @@ function validateUsername(username) {
         return true
     }
 }
+
+function validateAndSubmitLogin() {
+    if (validatePassword(password) && validateUsername(username)) {
+        getTravelerIdFromLogin()
+        displayCurrentTravelerTrips()
+        displayCurrentTravelerTripsView()
+        loginForm.reset()
+    } else if (validatePassword(password) === false && validateUsername(username)) {
+        loginErrorMessage.innerText = `wrong password`
+    } else if (validatePassword(password) && validateUsername(username) === false) {
+        loginErrorMessage.innerText = `wrong username`
+    } else {
+        loginErrorMessage.innerText = `wrong username and password`
+    }
+}
 //event listeners here
 window.addEventListener("load", fetchApiCalls())
 
@@ -298,18 +309,7 @@ newTripForm.addEventListener('submit', (e) => {
 
 loginForm.addEventListener('submit', (e) => {
     e.preventDefault()
-    if (validatePassword(password) && validateUsername(username)) {
-        getTravelerIdFromLogin()
-        displayCurrentTravelerTrips()
-        displayCurrentTravelerTripsView()
-        loginForm.reset()
-    } else if (validatePassword(password) === false && validateUsername(username)) {
-        loginErrorMessage.innerText = `wrong password`
-    } else if (validatePassword(password) && validateUsername(username) === false) {
-        loginErrorMessage.innerText = `wrong username`
-    } else {
-        loginErrorMessage.innerText = `wrong username and password`
-    }
+    validateAndSubmitLogin()
 })
 
 signOutButton.addEventListener('click', (e) => {
