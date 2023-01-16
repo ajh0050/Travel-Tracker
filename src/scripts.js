@@ -69,13 +69,11 @@ function loadHandler() {
     if (currentTraveler === null) {
         currentTraveler = new Traveler(allTravelers[2], allTrips)
     }
-    console.log("allTrips inside of fetchApiCalls",allTrips)
 
     displayCurrentTravelerTrips()
 }
 
 function displayCurrentTravelerTrips() {
-    //paints display for everything in traveler dashboard view including header
     displayCurrentTravelerPendingTrips()
     displayCurrentTravelerUpcomingTrips()
     displayCurrentTravelerPastTrips()
@@ -83,7 +81,6 @@ function displayCurrentTravelerTrips() {
 }
 
 function postDisplayCurrentTravelerTrips() {
-    //paints display for everything in traveler dashboard view including header
     let traveler = allTravelers.find(traveler=> currentTraveler.userID === traveler.id)
     
     currentTraveler = new Traveler(traveler, allTrips)
@@ -221,7 +218,6 @@ function postNewTrip(){
     fetchApiCalls().then(()=>{
         postDisplayCurrentTravelerTrips()
         displayCurrentTravelerTripsView()
-        console.log("allTrips after post",allTrips)
     })
 
 
