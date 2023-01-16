@@ -16,6 +16,7 @@ const pendingTripsOfCurrentTraveler = document.querySelector(".current-traveler-
 const upcomingTripsOfCurrentTraveler = document.querySelector(".current-traveler-upcoming-trips")
 const pastTripsOfCurrentTraveler = document.querySelector(".current-traveler-past-trips")
 const newTripEstimatedCostDisplay = document.querySelector(".estimated-new-trip-cost-display")
+const loginErrorMessage = document.querySelector('.login-error-message')
 
 const createNewTripViewButton = document.querySelector('.create-new-trip-view-button')
 const viewCurrentTravelerTripsDisplayButton = document.querySelector('.view-trips-display-button')
@@ -31,6 +32,7 @@ const newTripNumberOfTravelers = document.querySelector('#newTripNumberOfTravele
 
 const loginForm = document.querySelector('.login-form')
 const username = document.querySelector('#loginUsername')
+const password = document.querySelector('#loginPassword')
 
 const travelerDashboardView = document.querySelector('.traveler-dashboard-view')
 const travelerTripsDisplay = document.querySelector('.traveler-trips-display')
