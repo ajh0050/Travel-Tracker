@@ -1,5 +1,5 @@
 function tripCardHTML(trip, tripDate) {
-    return `
+  return `
     <article class="trip-card">
           <img class="card-image" src=${trip.destinationImage} alt=${trip.destinationImageAltText} >
           <div class="card-footer-container">
