@@ -221,9 +221,6 @@ function postNewTrip(){
         postDisplayCurrentTravelerTrips()
         displayCurrentTravelerTripsView()
     })
-
-
-  
 })
   .catch(error => {
     console.error(error.message)
@@ -250,6 +247,10 @@ function getTravelerIdFromLogin(){
 function displayLoginPage(){
     showElement(loginView)
     hideElement(travelerDashboardView)
+}
+
+function validatePassword(password) {
+   return password.value === 'travel' ? true : false
 }
 
 //event listeners here
@@ -279,11 +280,16 @@ newTripForm.addEventListener('submit', (e)=> {
 })
 
 loginForm.addEventListener('submit', (e) => {
-    e.preventDefault();
+    e.preventDefault()
+   if (validatePassword(password)) {
     getTravelerIdFromLogin()
     displayCurrentTravelerTrips()
     displayCurrentTravelerTripsView()
     loginForm.reset()
+   } else {
+    loginErrorMessage.innerText = `wrong password`
+   }
+
 })
 
 signOutButton.addEventListener('click', (e)=>{
