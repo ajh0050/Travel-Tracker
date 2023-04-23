@@ -36,4 +36,4 @@ npm install
 
 ## How to interact with the app
 
-To get past teh login page you use "traveler:id" for username so for the traveler with the of 8 the username will be "Traveler8" and the password for every traveler is "travel"
+To get past teh login page you use "traveler:id" for username so for the traveler with the of 8 the username will be "traveler8" and the password for every traveler is "travel"
